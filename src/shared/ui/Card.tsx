@@ -7,15 +7,15 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ hover = false, children, className = '', ...props }, ref) => {
-    // Beautiful notebook paper color with warm tone
-    const baseClasses = 'bg-[#FFFBF0] rounded-lg p-6 transition-smooth border-l-4 border-[#D4A574]';
-    const shadowClasses = 'shadow-[0_2px_8px_rgba(139,69,19,0.1),inset_0_0_0_1px_rgba(212,165,116,0.1)]';
+    // Lighter notebook paper color
+    const baseClasses = 'bg-[#FEFDFB] rounded-lg p-6 transition-smooth border-l-4 border-[#D4C4B0]';
+    const shadowClasses = 'shadow-[0_2px_8px_rgba(100,80,60,0.05),inset_0_0_0_1px_rgba(180,160,140,0.05)]';
     
     if (hover) {
       return (
         <motion.div
           ref={ref}
-          whileHover={{ y: -4, boxShadow: '0 8px 24px rgba(139, 69, 19, 0.15)' }}
+          whileHover={{ y: -4, boxShadow: '0 8px 24px rgba(139, 69, 19, 0.12)' }}
           transition={{ duration: 0.3 }}
           className={`${baseClasses} ${shadowClasses} ${className}`}
         >

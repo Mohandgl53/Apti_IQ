@@ -455,56 +455,58 @@ const TestPage = () => {
       {/* Full Screen Test Interface */}
       <div className="min-h-screen test-background flex flex-col">
         {/* TOP CONTROL BAR */}
-        <div className="bg-[#FFFBF0] border-b-4 border-[#D4A574] shadow-lg sticky top-0 z-40">
-          <div className="container mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-xl font-bold text-primary">{test.name}</h1>
-                <p className="text-sm text-gray-600">
+        <div className="bg-[#FDFBF7] border-b-4 border-[#B8A890] shadow-lg sticky top-0 z-40">
+          <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+              <div className="w-full sm:w-auto">
+                <h1 className="text-lg sm:text-xl font-bold text-primary">{test.name}</h1>
+                <p className="text-xs sm:text-sm text-gray-600">
                   Question {currentQuestion + 1} of {totalQuestions}
                 </p>
               </div>
 
-              <div className={`flex items-center gap-3 px-6 py-3 rounded-lg ${isTimeCritical ? 'bg-red-100 border-2 border-red-500' : 'bg-blue-50 border-2 border-blue-200'
-                }`}>
-                <span className="text-3xl">⏱️</span>
-                <div>
-                  <p className="text-xs text-gray-600 font-medium">Time Remaining</p>
-                  <p className={`text-3xl font-bold ${isTimeCritical ? 'text-red-600' : 'text-primary'}`}>
-                    {minutes}:{seconds.toString().padStart(2, '0')}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 px-4 py-2 bg-orange-50 border border-orange-200 rounded-lg">
-                  <span className="text-xl">⚠️</span>
+              <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                <div className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-6 py-2 sm:py-3 rounded-lg ${isTimeCritical ? 'bg-red-100 border-2 border-red-500' : 'bg-blue-50 border-2 border-blue-200'
+                  }`}>
+                  <span className="text-2xl sm:text-3xl">⏱️</span>
                   <div>
-                    <p className="text-xs text-gray-600">Violations</p>
-                    <p className="text-lg font-bold text-orange-600">
-                      {session.violations}/{MAX_VIOLATIONS}
+                    <p className="text-xs text-gray-600 font-medium">Time Left</p>
+                    <p className={`text-xl sm:text-3xl font-bold ${isTimeCritical ? 'text-red-600' : 'text-primary'}`}>
+                      {minutes}:{seconds.toString().padStart(2, '0')}
                     </p>
                   </div>
                 </div>
 
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={handleSubmit}
-                  className="shadow-md"
-                >
-                  Submit Test
-                </Button>
+                <div className="flex items-center gap-2 sm:gap-4">
+                  <div className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-orange-50 border border-orange-200 rounded-lg">
+                    <span className="text-lg sm:text-xl">⚠️</span>
+                    <div>
+                      <p className="text-xs text-gray-600">Violations</p>
+                      <p className="text-base sm:text-lg font-bold text-orange-600">
+                        {session.violations}/{MAX_VIOLATIONS}
+                      </p>
+                    </div>
+                  </div>
+
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={handleSubmit}
+                    className="shadow-md whitespace-nowrap"
+                  >
+                    Submit
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* MAIN CONTENT AREA */}
-        <div className="flex-1 container mx-auto px-6 py-8">
-          <div className="grid grid-cols-12 gap-6 h-full">
+        <div className="flex-1 container mx-auto px-4 sm:px-6 py-4 sm:py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 h-full">
             {/* CENTER: QUESTION & OPTIONS AREA */}
-            <div className="col-span-9 flex items-center justify-center">
+            <div className="lg:col-span-9 flex items-center justify-center order-2 lg:order-1">
               <motion.div
                 key={currentQuestion}
                 initial={{ opacity: 0, x: 20 }}
@@ -602,8 +604,8 @@ const TestPage = () => {
             </div>
 
             {/* RIGHT: COMPACT QUESTION NAVIGATION */}
-            <div className="col-span-3">
-              <Card className="sticky top-24 notebook-paper notebook-shadow">
+            <div className="lg:col-span-3 order-1 lg:order-2">
+              <Card className="lg:sticky lg:top-24 notebook-paper notebook-shadow">
                 <h3 className="font-bold text-primary mb-3 text-sm">Questions</h3>
 
                 <div className="bg-gray-50 rounded-lg p-3 mb-4">
@@ -619,7 +621,7 @@ const TestPage = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-5 gap-1.5 mb-4">
+                <div className="grid grid-cols-5 sm:grid-cols-6 lg:grid-cols-5 gap-1.5 mb-4">
                   {test.questions.map((q, index) => {
                     const state = getQuestionState(q.id);
                     const colorClass = getQuestionStateColor(state);

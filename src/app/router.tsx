@@ -22,6 +22,12 @@ const ProfilePage = lazy(() => import('../features/profile/pages/ProfilePage'));
 const AdminPage = lazy(() => import('../features/admin/pages/AdminPage'));
 const ProgressPage = lazy(() => import('../features/dashboard/pages/ProgressPage'));
 const TournamentsPage = lazy(() => import('../features/tournaments/pages/TournamentsPage'));
+const TeacherDashboard = lazy(() => import('../features/teacher/pages/TeacherDashboard'));
+const StudentsPage = lazy(() => import('../features/teacher/pages/StudentsPage'));
+const CreateLessonPage = lazy(() => import('../features/teacher/pages/CreateLessonPage'));
+const CreateTestPage = lazy(() => import('../features/teacher/pages/CreateTestPage'));
+const GradeAssignmentsPage = lazy(() => import('../features/teacher/pages/GradeAssignmentsPage'));
+const TeacherAnalyticsPage = lazy(() => import('../features/teacher/pages/TeacherAnalyticsPage'));
 
 const LoadingFallback = () => (
   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -44,6 +50,66 @@ export const AppRouter = () => {
           element={
             <ProtectedRoute>
               <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/dashboard"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <TeacherDashboard />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/students"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <StudentsPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/create-lesson"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <CreateLessonPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/create-test"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <CreateTestPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/grade-assignments"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <GradeAssignmentsPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/analytics"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <TeacherAnalyticsPage />
+              </Suspense>
             </ProtectedRoute>
           }
         />

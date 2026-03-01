@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '../../shared/ui/Button';
 import { Card } from '../../shared/ui/Card';
+import { ThreeBackground } from '../../shared/ui/ThreeBackground';
 
 export const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-[#FFF8E7]">
+    <div className="min-h-screen bg-[#FAF8F4]">
+      <ThreeBackground variant="both" color="#E74C3C" particleCount={2500} />
       {/* Hero Section - Notebook Theme with 3D Animation */}
-      <section className="container mx-auto px-4 py-20 relative overflow-hidden min-h-screen flex items-center justify-center">
+      <section className="container mx-auto px-4 py-12 sm:py-16 md:py-20 relative overflow-hidden min-h-screen flex items-center justify-center">
         {/* Animated Notebook Background */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Floating Notebook Pages */}
@@ -163,9 +165,9 @@ export const LandingPage = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
+            className="mb-6 sm:mb-8"
           >
-            <h1 className="text-7xl md:text-8xl font-bold text-[#2C3E50] mb-4 relative">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#2C3E50] mb-4 relative">
               <span className="relative inline-block">
                 Learn. Test. Rank.
                 {/* Underline effect like notebook */}
@@ -183,7 +185,7 @@ export const LandingPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed px-4"
           >
             Master aptitude tests with our comprehensive learning platform. 
             Study like you're writing in your favorite notebook.
@@ -193,7 +195,7 @@ export const LandingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="flex gap-4 justify-center flex-wrap mb-16"
+            className="flex gap-3 sm:gap-4 justify-center flex-wrap mb-12 sm:mb-16 px-4"
           >
             <Link to="/register">
               <motion.div

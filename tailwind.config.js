@@ -12,6 +12,10 @@ export default {
         secondary: '#9B59B6',
         accent: '#E74C3C',
       },
+      fontFamily: {
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'sans-serif'],
+        heading: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+      },
       boxShadow: {
         'paper': '0 1px 3px rgba(0, 0, 0, 0.06)',
         'card': '0 2px 6px rgba(0, 0, 0, 0.08)',

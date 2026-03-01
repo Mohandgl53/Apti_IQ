@@ -7,6 +7,7 @@ export const Navbar = () => {
   const location = useLocation();
   const { isAuthenticated, user, logout } = useAuthStore();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -15,18 +16,23 @@ export const Navbar = () => {
     ${isActive(path) ? 'font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-secondary' : ''}
   `;
 
+  const mobileNavLinkClass = (path: string) => `
+    block px-4 py-3 text-primary hover:bg-gray-100 transition-smooth rounded-lg
+    ${isActive(path) ? 'font-bold bg-secondary/10' : ''}
+  `;
+
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-30">
+    <nav className="bg-[#FEFDFB] shadow-sm sticky top-0 z-30 border-b border-[#E5DDD0]">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Left: Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-primary">AptIQ</span>
+          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-smooth">
+            <img src="/logo.svg" alt="AptIQ Logo" className="h-10" />
           </Link>
 
-          {/* Center: Main Navigation */}
+          {/* Center: Desktop Navigation */}
           {isAuthenticated && (
-            <div className="flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-8">
               <Link to="/dashboard" className={navLinkClass('/dashboard')}>
                 Dashboard
               </Link>
@@ -46,63 +52,152 @@ export const Navbar = () => {
           )}
 
           {/* Right: User Menu or Auth Buttons */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
             {isAuthenticated ? (
-              <div className="relative">
+              <>
+                {/* Desktop User Dropdown */}
+                <div className="hidden md:block relative">
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="flex items-center space-x-2 text-primary hover:text-secondary transition-smooth"
+                  >
+                    <span className="font-medium">{user?.name}</span>
+                    <svg
+                      className={`w-4 h-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  {dropdownOpen && (
+                    <>
+                      <div
+                        className="fixed inset-0 z-10"
+                        onClick={() => setDropdownOpen(false)}
+                      />
+                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20">
+                        <Link
+                          to="/profile"
+                          className="block px-4 py-2 text-primary hover:bg-gray-100 transition-smooth"
+                          onClick={() => setDropdownOpen(false)}
+                        >
+                          Profile
+                        </Link>
+                        <button
+                          onClick={() => {
+                            logout();
+                            setDropdownOpen(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-primary hover:bg-gray-100 transition-smooth"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Mobile Menu Button */}
                 <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center space-x-2 text-primary hover:text-secondary transition-smooth"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="lg:hidden p-2 text-primary hover:text-secondary transition-smooth"
+                  aria-label="Toggle menu"
                 >
-                  <span className="font-medium">{user?.name}</span>
                   <svg
-                    className={`w-4 h-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    {mobileMenuOpen ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    )}
                   </svg>
                 </button>
-
-                {dropdownOpen && (
-                  <>
-                    <div
-                      className="fixed inset-0 z-10"
-                      onClick={() => setDropdownOpen(false)}
-                    />
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20">
-                      <Link
-                        to="/profile"
-                        className="block px-4 py-2 text-primary hover:bg-gray-100 transition-smooth"
-                        onClick={() => setDropdownOpen(false)}
-                      >
-                        Profile
-                      </Link>
-                      <button
-                        onClick={() => {
-                          logout();
-                          setDropdownOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2 text-primary hover:bg-gray-100 transition-smooth"
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
+              </>
             ) : (
               <div className="flex items-center space-x-3">
                 <Link to="/login">
                   <Button variant="outline" size="sm">Login</Button>
                 </Link>
-                <Link to="/register">
+                <Link to="/register" className="hidden sm:block">
                   <Button variant="primary" size="sm">Sign Up</Button>
                 </Link>
               </div>
             )}
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isAuthenticated && mobileMenuOpen && (
+          <div className="lg:hidden py-4 border-t border-gray-200">
+            <div className="space-y-2">
+              <Link
+                to="/dashboard"
+                className={mobileNavLinkClass('/dashboard')}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                📊 Dashboard
+              </Link>
+              <Link
+                to="/subjects"
+                className={mobileNavLinkClass('/subjects')}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                📚 Learn
+              </Link>
+              <Link
+                to="/test"
+                className={mobileNavLinkClass('/test')}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                📝 Test
+              </Link>
+              <Link
+                to="/tournaments"
+                className={mobileNavLinkClass('/tournaments')}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                🏆 Tournaments
+              </Link>
+              <Link
+                to="/leaderboard"
+                className={mobileNavLinkClass('/leaderboard')}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                🏅 Leaderboard
+              </Link>
+              
+              {/* Mobile User Menu */}
+              <div className="pt-4 mt-4 border-t border-gray-200">
+                <div className="px-4 py-2 text-sm text-gray-600">
+                  Signed in as <span className="font-medium text-primary">{user?.name}</span>
+                </div>
+                <Link
+                  to="/profile"
+                  className="block px-4 py-3 text-primary hover:bg-gray-100 transition-smooth rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  👤 Profile
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 text-primary hover:bg-gray-100 transition-smooth rounded-lg"
+                >
+                  🚪 Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

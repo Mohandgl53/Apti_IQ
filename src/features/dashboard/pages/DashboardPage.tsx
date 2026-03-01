@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { api } from '../../../services/api';
 import { QUERY_KEYS } from '../../../shared/constants';
@@ -9,6 +10,7 @@ import { Button } from '../../../shared/ui/Button';
 import { SkeletonCard } from '../../../shared/ui/Skeleton';
 import { Badge } from '../../../shared/ui/Badge';
 import { DashboardNav } from '../components/DashboardNav';
+import { useAuthStore } from '../../auth/store/authStore';
 
 import type { DashboardStats } from '../../../shared/types';
 
@@ -92,10 +94,24 @@ const getRecommendation = (stats: DashboardStats | undefined) => {
 
 export const DashboardPage = () => {
   const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
+  
+  // Redirect teachers to their dashboard
+  useEffect(() => {
+    if (user?.role === 'teacher') {
+      navigate('/teacher/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
+  
   const { data: stats, isLoading, isError } = useQuery({
     queryKey: [QUERY_KEYS.DASHBOARD],
     queryFn: api.dashboard.getStats,
   });
+  
+  // Don't render student dashboard for teachers
+  if (user?.role === 'teacher') {
+    return null;
+  }
 
   if (isLoading) {
     return (

@@ -421,13 +421,13 @@ export const mockApi = {
     return user;
   },
 
-  register: async (data: { email: string; password: string; name: string }): Promise<User> => {
+  register: async (data: { email: string; password: string; name: string; role?: 'student' | 'teacher' }): Promise<User> => {
     await delay();
     const user: User = {
       id: Date.now().toString(),
       email: data.email,
       name: data.name,
-      role: 'student',
+      role: data.role || 'student',
       badges: [],
       createdAt: new Date().toISOString(),
     };

@@ -5,7 +5,7 @@ export interface User {
   college?: string;
   linkedIn?: string;
   profilePicture?: string;
-  role: 'student' | 'admin';
+  role: 'student' | 'teacher' | 'admin';
   badges: Badge[];
   createdAt: string;
 }

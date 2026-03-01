@@ -9,6 +9,7 @@ import { useToast } from '../../../shared/hooks/useToast';
 import { Button } from '../../../shared/ui/Button';
 import { Input } from '../../../shared/ui/Input';
 import { Card } from '../../../shared/ui/Card';
+import { ThreeBackground } from '../../../shared/ui/ThreeBackground';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -42,7 +43,8 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+      <ThreeBackground variant="login" color="#2C3E50" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

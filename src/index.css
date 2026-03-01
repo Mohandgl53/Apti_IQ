@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,19 +7,25 @@
 @layer base {
   body {
     @apply text-primary;
-    background-color: #FFF8E7; /* Warm cream notebook paper */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background-color: #FAF8F4; /* Lighter, brighter cream */
     background-image: 
-      /* Ruled lines */
+      /* Ruled lines - much lighter */
       repeating-linear-gradient(
         transparent,
         transparent 31px,
-        #D4A574 31px,
-        #D4A574 32px
+        #E5DDD0 31px,
+        #E5DDD0 32px
       ),
       /* Subtle paper texture */
-      url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03' /%3E%3C/svg%3E");
+      url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.015' /%3E%3C/svg%3E");
     background-size: 100% 32px, 100px 100px;
     background-attachment: fixed; /* Fixed background - stays in place while scrolling */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
   }
 }
 
@@ -27,12 +35,12 @@
   }
   
   .notebook-paper {
-    background-color: #FFFBF0;
+    background-color: #FEFDFB;
     background-image: repeating-linear-gradient(
       transparent,
       transparent 31px,
-      #D4A574 31px,
-      #D4A574 32px
+      #E5DDD0 31px,
+      #E5DDD0 32px
     );
     background-size: 100% 32px;
     background-attachment: local;
@@ -40,22 +48,23 @@
   
   .notebook-shadow {
     box-shadow: 
-      2px 2px 8px rgba(139, 69, 19, 0.1),
-      inset 0 0 0 1px rgba(212, 165, 116, 0.1);
+      2px 2px 8px rgba(100, 80, 60, 0.06),
+      inset 0 0 0 1px rgba(180, 160, 140, 0.06);
   }
   
   .test-background {
-    background-color: #FAF6ED;
+    background-color: #FCFBF9;
     background-image: 
       /* Very subtle grid pattern */
-      linear-gradient(rgba(212, 165, 116, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+      linear-gradient(rgba(180, 160, 140, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(180, 160, 140, 0.04) 1px, transparent 1px),
       /* Paper texture */
-      url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.02' /%3E%3C/svg%3E");
+      url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.01' /%3E%3C/svg%3E");
     background-size: 32px 32px, 32px 32px, 100px 100px;
     background-attachment: fixed;
   }
 }
+
 
 
 
