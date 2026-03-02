@@ -195,9 +195,6 @@ const TestPage = () => {
   isModalOpen.current = violationModal.isOpen;
 
   // Monitor and maintain fullscreen during test
-  // NOTE: violationModal.isOpen is intentionally NOT in the deps array —
-  // we read it via isModalOpen.current ref to avoid stale closures and
-  // prevent the listener from being re-registered on every modal toggle.
   useEffect(() => {
     if (!session) return;
 
@@ -227,6 +224,15 @@ const TestPage = () => {
           isProcessingViolation.current = true;
           incrementViolations();
           setViolationModal({ isOpen: true, type: 'fullscreen-exit' });
+          
+          // Reset processing flag after a delay to allow modal to open
+          setTimeout(() => {
+            isProcessingViolation.current = false;
+          }, 500);
+        } else if (isInFullscreen && isProcessingViolation.current) {
+          // User re-entered fullscreen (likely from modal), reset the flag
+          console.log('✅ Fullscreen restored, resetting violation flag');
+          isProcessingViolation.current = false;
         }
       };
 
