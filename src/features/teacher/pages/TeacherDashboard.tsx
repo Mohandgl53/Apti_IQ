@@ -181,12 +181,22 @@ export const TeacherDashboard = () => {
                         <p className="font-bold text-primary">{test.title}</p>
                         <p className="text-sm text-gray-600">{test.subject}</p>
                       </div>
-                      <Badge variant="primary">{test.questions.length} Qs</Badge>
+                      <div className="flex gap-2">
+                        <Badge variant="primary">{test.questions.length} Qs</Badge>
+                        {test.status === 'scheduled' && (
+                          <Badge variant="warning">Scheduled</Badge>
+                        )}
+                      </div>
                     </div>
                     <div className="flex items-center gap-4 text-sm text-gray-600 mt-3">
                       <span>⏱️ {test.duration} min</span>
                       <span>📊 {test.totalMarks} marks</span>
                     </div>
+                    {test.isScheduled && test.startDate && (
+                      <div className="mt-2 text-xs text-blue-600">
+                        📅 {new Date(test.startDate).toLocaleDateString()} {test.startTime} - {new Date(test.endDate).toLocaleDateString()} {test.endTime}
+                      </div>
+                    )}
                     <div className="mt-3 p-2 bg-gray-50 rounded border border-dashed border-gray-300 flex items-center justify-between">
                       <div>
                         <p className="text-xs text-gray-500 mb-1">Test Code:</p>
