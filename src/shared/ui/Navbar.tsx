@@ -33,21 +33,40 @@ export const Navbar = () => {
           {/* Center: Desktop Navigation */}
           {isAuthenticated && (
             <div className="hidden lg:flex items-center space-x-8">
-              <Link to="/dashboard" className={navLinkClass('/dashboard')}>
-                Dashboard
-              </Link>
-              <Link to="/subjects" className={navLinkClass('/subjects')}>
-                Learn
-              </Link>
-              <Link to="/test" className={navLinkClass('/test')}>
-                Test
-              </Link>
-              <Link to="/tournaments" className={navLinkClass('/tournaments')}>
-                Tournaments
-              </Link>
-              <Link to="/leaderboard" className={navLinkClass('/leaderboard')}>
-                Leaderboard
-              </Link>
+              {user?.role === 'teacher' ? (
+                <>
+                  <Link to="/teacher/dashboard" className={navLinkClass('/teacher/dashboard')}>
+                    Dashboard
+                  </Link>
+                  <Link to="/teacher/students" className={navLinkClass('/teacher/students')}>
+                    Students
+                  </Link>
+                  <Link to="/teacher/create-test" className={navLinkClass('/teacher/create-test')}>
+                    Create Test
+                  </Link>
+                  <Link to="/teacher/analytics" className={navLinkClass('/teacher/analytics')}>
+                    Analytics
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/dashboard" className={navLinkClass('/dashboard')}>
+                    Dashboard
+                  </Link>
+                  <Link to="/subjects" className={navLinkClass('/subjects')}>
+                    Learn
+                  </Link>
+                  <Link to="/test" className={navLinkClass('/test')}>
+                    Test
+                  </Link>
+                  <Link to="/tournaments" className={navLinkClass('/tournaments')}>
+                    Tournaments
+                  </Link>
+                  <Link to="/leaderboard" className={navLinkClass('/leaderboard')}>
+                    Leaderboard
+                  </Link>
+                </>
+              )}
             </div>
           )}
 
@@ -137,41 +156,76 @@ export const Navbar = () => {
         {isAuthenticated && mobileMenuOpen && (
           <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="space-y-2">
-              <Link
-                to="/dashboard"
-                className={mobileNavLinkClass('/dashboard')}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                📊 Dashboard
-              </Link>
-              <Link
-                to="/subjects"
-                className={mobileNavLinkClass('/subjects')}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                📚 Learn
-              </Link>
-              <Link
-                to="/test"
-                className={mobileNavLinkClass('/test')}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                📝 Test
-              </Link>
-              <Link
-                to="/tournaments"
-                className={mobileNavLinkClass('/tournaments')}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                🏆 Tournaments
-              </Link>
-              <Link
-                to="/leaderboard"
-                className={mobileNavLinkClass('/leaderboard')}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                🏅 Leaderboard
-              </Link>
+              {user?.role === 'teacher' ? (
+                <>
+                  <Link
+                    to="/teacher/dashboard"
+                    className={mobileNavLinkClass('/teacher/dashboard')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📊 Dashboard
+                  </Link>
+                  <Link
+                    to="/teacher/students"
+                    className={mobileNavLinkClass('/teacher/students')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    👥 Students
+                  </Link>
+                  <Link
+                    to="/teacher/create-test"
+                    className={mobileNavLinkClass('/teacher/create-test')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🧪 Create Test
+                  </Link>
+                  <Link
+                    to="/teacher/analytics"
+                    className={mobileNavLinkClass('/teacher/analytics')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📈 Analytics
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/dashboard"
+                    className={mobileNavLinkClass('/dashboard')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📊 Dashboard
+                  </Link>
+                  <Link
+                    to="/subjects"
+                    className={mobileNavLinkClass('/subjects')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📚 Learn
+                  </Link>
+                  <Link
+                    to="/test"
+                    className={mobileNavLinkClass('/test')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📝 Test
+                  </Link>
+                  <Link
+                    to="/tournaments"
+                    className={mobileNavLinkClass('/tournaments')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🏆 Tournaments
+                  </Link>
+                  <Link
+                    to="/leaderboard"
+                    className={mobileNavLinkClass('/leaderboard')}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    🏅 Leaderboard
+                  </Link>
+                </>
+              )}
               
               {/* Mobile User Menu */}
               <div className="pt-4 mt-4 border-t border-gray-200">

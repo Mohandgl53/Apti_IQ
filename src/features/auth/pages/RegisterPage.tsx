@@ -47,7 +47,15 @@ export const RegisterPage = () => {
       const user = await api.auth.register(data);
       setUser(user);
       toast.success('Registration successful!');
-      navigate('/dashboard');
+      
+      // Redirect based on user role
+      if (user.role === 'teacher') {
+        navigate('/teacher/dashboard');
+      } else if (user.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     } catch {
       toast.error('Registration failed. Please try again.');
     }

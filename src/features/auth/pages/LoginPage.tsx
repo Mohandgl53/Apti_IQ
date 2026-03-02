@@ -36,7 +36,15 @@ export const LoginPage = () => {
       const user = await api.auth.login(data.email);
       setUser(user);
       toast.success('Login successful!');
-      navigate('/dashboard');
+      
+      // Redirect based on user role
+      if (user.role === 'teacher') {
+        navigate('/teacher/dashboard');
+      } else if (user.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     } catch {
       toast.error('Login failed. Please try again.');
     }
