@@ -13,6 +13,7 @@ const SubjectsPage = lazy(() => import('../features/learning/pages/SubjectsPage'
 const ChaptersPage = lazy(() => import('../features/learning/pages/ChaptersPage'));
 const LessonsPage = lazy(() => import('../features/learning/pages/LessonsPage'));
 const LessonDetailPage = lazy(() => import('../features/learning/pages/LessonDetailPage'));
+const TestSelectionPage = lazy(() => import('../features/test-engine/pages/TestSelectionPage'));
 const TestInstructionsPage = lazy(() => import('../features/test-engine/pages/TestInstructionsPage'));
 const TestPage = lazy(() => import('../features/test-engine/pages/TestPage'));
 const TestResultsPage = lazy(() => import('../features/test-engine/pages/TestResultsPage'));
@@ -165,6 +166,16 @@ export const AppRouter = () => {
         />
         <Route
           path="/test"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<LoadingFallback />}>
+                <TestSelectionPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/test/instructions"
           element={
             <ProtectedRoute>
               <Suspense fallback={<LoadingFallback />}>

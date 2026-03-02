@@ -1,14 +1,29 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { StatCard } from '../../../shared/ui/StatCard';
 import { Badge } from '../../../shared/ui/Badge';
 import { useAuthStore } from '../../auth/store/authStore';
+import { useToast } from '../../../shared/hooks/useToast';
 
 export const TeacherDashboard = () => {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
+  const toast = useToast();
+  const [createdTests, setCreatedTests] = useState<any[]>([]);
+
+  // Load created tests from localStorage
+  useState(() => {
+    const tests = JSON.parse(localStorage.getItem('teacherTests') || '[]');
+    setCreatedTests(tests.slice(-5)); // Show last 5 tests
+  });
+
+  const copyTestCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    toast.success('Test code copied to clipboard!');
+  };
 
   // Mock teacher stats - replace with real API call
   const teacherStats = {
@@ -150,11 +165,67 @@ export const TeacherDashboard = () => {
       </motion.div>
 
       <div className="grid lg:grid-cols-2 gap-8">
+        {/* Created Tests */}
+        {createdTests.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <Card className="bg-gradient-to-r from-green-50 to-teal-50 border-2 border-green-200">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-primary">🧪 Created Tests</h2>
+                <Badge variant="success">{createdTests.length} Active</Badge>
+              </div>
+              <div className="space-y-3">
+                {createdTests.map((test) => (
+                  <div
+                    key={test.id}
+                    className="p-4 bg-white rounded-lg border border-green-200 hover:shadow-md transition-smooth"
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">{test.title}</p>
+                        <p className="text-sm text-gray-600">{test.subject}</p>
+                      </div>
+                      <Badge variant="primary">{test.questions.length} Qs</Badge>
+                    </div>
+                    <div className="flex items-center gap-4 text-sm text-gray-600 mt-3">
+                      <span>⏱️ {test.duration} min</span>
+                      <span>📊 {test.totalMarks} marks</span>
+                    </div>
+                    <div className="mt-3 p-2 bg-gray-50 rounded border border-dashed border-gray-300 flex items-center justify-between">
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">Test Code:</p>
+                        <p className="font-mono font-bold text-primary">{test.code}</p>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => copyTestCode(test.code)}
+                      >
+                        📋 Copy
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Button
+                variant="primary"
+                className="w-full mt-4"
+                onClick={() => navigate('/teacher/create-test')}
+              >
+                + Create New Test
+              </Button>
+            </Card>
+          </motion.div>
+        )}
+
         {/* Recent Activity */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: createdTests.length > 0 ? 0.7 : 0.6 }}
         >
           <Card>
             <div className="flex items-center justify-between mb-6">
@@ -185,12 +256,14 @@ export const TeacherDashboard = () => {
             </Button>
           </Card>
         </motion.div>
+      </div>
 
+      <div className="grid lg:grid-cols-2 gap-8">
         {/* Upcoming Classes */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 0.8 }}
         >
           <Card>
             <h2 className="text-2xl font-bold text-primary mb-6">📅 Upcoming Classes</h2>
@@ -228,7 +301,7 @@ export const TeacherDashboard = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
+        transition={{ delay: 0.9 }}
       >
         <Card>
           <h2 className="text-2xl font-bold text-primary mb-6">📊 Student Performance Overview</h2>
@@ -256,7 +329,7 @@ export const TeacherDashboard = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9 }}
+        transition={{ delay: 1.0 }}
       >
         <Card className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200">
           <h2 className="text-2xl font-bold text-primary mb-4">📚 Teaching Resources</h2>

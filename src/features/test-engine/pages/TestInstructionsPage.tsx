@@ -9,6 +9,30 @@ import { MAX_VIOLATIONS } from "../../../shared/constants";
 const TestInstructionsPage = () => {
   const navigate = useNavigate();
   const [agreed, setAgreed] = useState(false);
+  const [testInfo, setTestInfo] = useState<{ type?: string; code?: string }>({});
+
+  // Get test info from session storage
+  useState(() => {
+    const testType = sessionStorage.getItem('testType');
+    const testCode = sessionStorage.getItem('testCode');
+    setTestInfo({ type: testType || undefined, code: testCode || undefined });
+  });
+
+  const getTestTitle = () => {
+    if (testInfo.code) {
+      return `Teacher's Test (Code: ${testInfo.code})`;
+    }
+    switch (testInfo.type) {
+      case 'practice':
+        return 'Practice Test';
+      case 'mock':
+        return 'Mock Test';
+      case 'advanced':
+        return 'Advanced Test';
+      default:
+        return 'Aptitude Test';
+    }
+  };
 
   const rules = [
     {
@@ -142,13 +166,13 @@ const TestInstructionsPage = () => {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h1 className="text-4xl font-bold text-primary mb-2">
-              Test Instructions
+              {getTestTitle()}
             </h1>
             <p className="text-gray-600">
               Please read carefully before starting
             </p>
           </div>
-          <Button variant="outline" onClick={() => navigate("/dashboard")}>
+          <Button variant="outline" onClick={() => navigate("/test")}>
             ← Back
           </Button>
         </div>

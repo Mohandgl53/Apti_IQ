@@ -54,10 +54,42 @@ export const CreateTestPage = () => {
     }
   };
 
+  const generateTestCode = (): string => {
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numbers = '0123456789';
+    
+    const randomLetters = (count: number) =>
+      Array.from({ length: count }, () => letters[Math.floor(Math.random() * letters.length)]).join('');
+    
+    const randomNumbers = (count: number) =>
+      Array.from({ length: count }, () => numbers[Math.floor(Math.random() * numbers.length)]).join('');
+    
+    return `${randomLetters(3)}-${randomNumbers(3)}-${randomLetters(3)}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Test created successfully!');
-    setTimeout(() => navigate('/teacher/dashboard'), 1500);
+    const testCode = generateTestCode();
+    
+    // Store test in localStorage (in real app, this would be API call)
+    const existingTests = JSON.parse(localStorage.getItem('teacherTests') || '[]');
+    const newTest = {
+      id: Date.now().toString(),
+      code: testCode,
+      ...testInfo,
+      questions,
+      createdAt: new Date().toISOString(),
+    };
+    existingTests.push(newTest);
+    localStorage.setItem('teacherTests', JSON.stringify(existingTests));
+    
+    toast.success(`Test created! Code: ${testCode}`);
+    
+    // Show code in alert for easy copying
+    setTimeout(() => {
+      alert(`Test Created Successfully!\n\nTest Code: ${testCode}\n\nShare this code with your students so they can join the test.`);
+      navigate('/teacher/dashboard');
+    }, 1000);
   };
 
   return (
