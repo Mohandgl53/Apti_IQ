@@ -6,12 +6,15 @@ export const TeacherNav = () => {
 
   const navItems = [
     { path: '/teacher/dashboard', label: 'Overview', icon: '📊' },
+    { path: '/teacher/test-results', label: 'Test Results', icon: '📋' },
+    { path: '/teacher/notes', label: 'Notes & Updates', icon: '📝' },
+    { path: '/teacher/analytics', label: 'Student Analytics', icon: '📈' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="w-64 sticky top-20">
+    <div className="hidden lg:block lg:sticky lg:top-20 w-64">
       <Card className="p-4">
         <h3 className="font-bold text-primary mb-4 text-sm uppercase tracking-wide">
           Teacher Menu

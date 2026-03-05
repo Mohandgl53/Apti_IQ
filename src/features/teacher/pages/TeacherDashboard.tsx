@@ -26,47 +26,67 @@ export const TeacherDashboard = () => {
     toast.success('Test code copied to clipboard!');
   };
 
+  const getActivityIcon = (type: string) => {
+    switch (type) {
+      case 'test_created': return '✅';
+      case 'test_updated': return '✏️';
+      case 'class_created': return '📚';
+      case 'grading': return '📝';
+      case 'shared': return '📤';
+      default: return '📌';
+    }
+  };
+
+  const getActivityColor = (type: string) => {
+    switch (type) {
+      case 'test_created': return 'bg-green-50 border-green-200';
+      case 'test_updated': return 'bg-blue-50 border-blue-200';
+      case 'class_created': return 'bg-purple-50 border-purple-200';
+      case 'grading': return 'bg-yellow-50 border-yellow-200';
+      case 'shared': return 'bg-orange-50 border-orange-200';
+      default: return 'bg-gray-50 border-gray-200';
+    }
+  };
+
   // Mock teacher stats - replace with real API call
   const teacherStats = {
     totalStudents: 156,
     activeTests: 12,
     totalTests: 45,
     avgStudentScore: 78,
-    recentActivity: [
-      { id: 1, student: 'John Doe', action: 'Completed Algebra Test', score: 85, time: '2 hours ago' },
-      { id: 2, student: 'Jane Smith', action: 'Completed Math Test', score: 92, time: '3 hours ago' },
-      { id: 3, student: 'Mike Johnson', action: 'Started Geometry Test', time: '5 hours ago' },
-    ],
-    upcomingClasses: [
-      { id: 1, subject: 'Mathematics', topic: 'Quadratic Equations', time: 'Today, 2:00 PM', students: 25 },
-      { id: 2, subject: 'Logical Reasoning', topic: 'Puzzles', time: 'Tomorrow, 10:00 AM', students: 30 },
+    teacherActivity: [
+      { id: 1, action: 'Created "Algebra Basics Test"', type: 'test_created', time: '2 hours ago', details: '30 questions, 45 min' },
+      { id: 2, action: 'Graded assignments for Mathematics - Section A', type: 'grading', time: '5 hours ago', details: '25 students' },
+      { id: 3, action: 'Created new class "Data Interpretation - Section C"', type: 'class_created', time: '1 day ago', details: 'Class code: DI-C-2024' },
+      { id: 4, action: 'Updated "Logical Reasoning Mock Test"', type: 'test_updated', time: '2 days ago', details: 'Modified 5 questions' },
+      { id: 5, action: 'Shared test code with students', type: 'shared', time: '3 days ago', details: 'Test: Quantitative Aptitude' },
     ],
   };
 
   return (
-    <div className="flex gap-8">
+    <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
       {/* Left Navigation */}
       <TeacherNav />
 
       {/* Main Content */}
-      <div className="flex-1 space-y-8">
+      <div className="flex-1 space-y-4 sm:space-y-6 lg:space-y-8 px-3 sm:px-4 lg:px-0 pb-20 lg:pb-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-4xl font-bold text-primary mb-2">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-primary mb-1 sm:mb-2">
               👨‍🏫 Teacher Dashboard
             </h1>
-            <p className="text-gray-600">Welcome back, {user?.name}!</p>
+            <p className="text-sm sm:text-base text-gray-600">Welcome back, {user?.name}!</p>
           </div>
-          <div className="flex gap-3">
-            <Button variant="outline" onClick={() => navigate('/teacher/students')}>
-              View Students
+          <div className="flex gap-2 sm:gap-3">
+            <Button variant="outline" size="sm" onClick={() => navigate('/teacher/test-results')}>
+              Test Results
             </Button>
-            <Button variant="primary" onClick={() => navigate('/teacher/create-test')}>
+            <Button variant="primary" size="sm" onClick={() => navigate('/teacher/create-test')}>
               + Create Test
             </Button>
           </div>
@@ -74,7 +94,7 @@ export const TeacherDashboard = () => {
       </motion.div>
 
       {/* Stats Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -128,46 +148,8 @@ export const TeacherDashboard = () => {
         </motion.div>
       </div>
 
-      {/* Quick Actions */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <Card className="bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-200">
-          <h2 className="text-xl font-bold text-primary mb-4">⚡ Quick Actions</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <Button
-              variant="outline"
-              className="w-full justify-start"
-              onClick={() => navigate('/teacher/classes')}
-            >
-              <span className="mr-2">👥</span> Manage Classes
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full justify-start"
-              onClick={() => navigate('/teacher/create-test')}
-            >
-              <span className="mr-2">🧪</span> Create Test
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full justify-start"
-              onClick={() => navigate('/teacher/analytics')}
-            >
-              <span className="mr-2">📈</span> View Analytics
-            </Button>
-          </div>
-          <div className="mt-4 p-3 bg-white rounded-lg border border-purple-200">
-            <p className="text-sm text-gray-700">
-              💡 <span className="font-medium">Tip:</span> Create classes first, then assign tests to those classes. Students must join a class to access your tests.
-            </p>
-          </div>
-        </Card>
-      </motion.div>
-
-      <div className="grid lg:grid-cols-2 gap-8">
+      {/* Created Tests & Recent Activity */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         {/* Created Tests */}
         {createdTests.length > 0 && (
           <motion.div
@@ -176,10 +158,10 @@ export const TeacherDashboard = () => {
             transition={{ delay: 0.6 }}
           >
             <Card className="bg-gradient-to-r from-green-50 to-teal-50 border-2 border-green-200">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-primary">🧪 Your Created Tests</h2>
-                  <p className="text-sm text-gray-600 mt-1">Share these codes with your students</p>
+                  <h2 className="text-base sm:text-lg lg:text-xl font-bold text-primary">🧪 Your Created Tests</h2>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-1">Share these codes with your students</p>
                 </div>
                 <Badge variant="success">{createdTests.length} Active</Badge>
               </div>
@@ -237,145 +219,34 @@ export const TeacherDashboard = () => {
           </motion.div>
         )}
 
-        {/* Recent Activity */}
+        {/* Teacher Activity */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: createdTests.length > 0 ? 0.7 : 0.6 }}
         >
           <Card>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-primary">📋 Recent Activity</h2>
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold text-primary">📋 My Recent Activity</h2>
             </div>
-            <div className="space-y-4">
-              {teacherStats.recentActivity.map((activity) => (
+            <div className="space-y-3">
+              {teacherStats.teacherActivity.map((activity) => (
                 <div
                   key={activity.id}
-                  className="flex items-start justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-smooth"
+                  className={`flex items-start gap-3 p-3 sm:p-4 rounded-lg border transition-smooth hover:shadow-md ${getActivityColor(activity.type)}`}
                 >
-                  <div className="flex-1">
-                    <p className="font-medium text-primary">{activity.student}</p>
-                    <p className="text-sm text-gray-600">{activity.action}</p>
+                  <span className="text-2xl flex-shrink-0">{getActivityIcon(activity.type)}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm sm:text-base font-medium text-primary">{activity.action}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">{activity.details}</p>
                     <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
                   </div>
-                  {activity.score && (
-                    <Badge variant={activity.score >= 80 ? 'success' : 'warning'}>
-                      {activity.score}%
-                    </Badge>
-                  )}
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full mt-4">
-              View All Activity
-            </Button>
           </Card>
         </motion.div>
       </div>
-
-      <div className="grid lg:grid-cols-2 gap-8">
-        {/* Upcoming Classes */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-        >
-          <Card>
-            <h2 className="text-2xl font-bold text-primary mb-6">📅 Upcoming Classes</h2>
-            <div className="space-y-4">
-              {teacherStats.upcomingClasses.map((classItem) => (
-                <div
-                  key={classItem.id}
-                  className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200"
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <p className="font-bold text-primary">{classItem.subject}</p>
-                      <p className="text-sm text-gray-700">{classItem.topic}</p>
-                    </div>
-                    <Badge variant="primary">{classItem.students} students</Badge>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600 mt-3">
-                    <span>🕐</span>
-                    <span>{classItem.time}</span>
-                  </div>
-                  <Button variant="secondary" size="sm" className="w-full mt-3">
-                    Start Class
-                  </Button>
-                </div>
-              ))}
-            </div>
-            <Button variant="outline" className="w-full mt-4">
-              View Schedule
-            </Button>
-          </Card>
-        </motion.div>
-      </div>
-
-      {/* Student Performance Overview */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9 }}
-      >
-        <Card>
-          <h2 className="text-2xl font-bold text-primary mb-6">📊 Student Performance Overview</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center p-6 bg-green-50 rounded-lg border border-green-200">
-              <p className="text-4xl font-bold text-green-600 mb-2">45</p>
-              <p className="text-sm text-gray-600">Excellent (80%+)</p>
-            </div>
-            <div className="text-center p-6 bg-yellow-50 rounded-lg border border-yellow-200">
-              <p className="text-4xl font-bold text-yellow-600 mb-2">78</p>
-              <p className="text-sm text-gray-600">Good (60-80%)</p>
-            </div>
-            <div className="text-center p-6 bg-red-50 rounded-lg border border-red-200">
-              <p className="text-4xl font-bold text-red-600 mb-2">33</p>
-              <p className="text-sm text-gray-600">Need Help (&lt;60%)</p>
-            </div>
-          </div>
-          <Button variant="primary" className="w-full mt-6">
-            View Detailed Analytics
-          </Button>
-        </Card>
-      </motion.div>
-
-      {/* Resources */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.0 }}
-      >
-        <Card className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200">
-          <h2 className="text-2xl font-bold text-primary mb-4">📚 Teaching Resources</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="p-4 bg-white rounded-lg">
-              <div className="text-3xl mb-2">📖</div>
-              <p className="font-bold text-primary mb-1">Lesson Templates</p>
-              <p className="text-sm text-gray-600 mb-3">Pre-made lesson structures</p>
-              <Button variant="outline" size="sm" className="w-full">
-                Browse
-              </Button>
-            </div>
-            <div className="p-4 bg-white rounded-lg">
-              <div className="text-3xl mb-2">🎯</div>
-              <p className="font-bold text-primary mb-1">Question Bank</p>
-              <p className="text-sm text-gray-600 mb-3">1000+ practice questions</p>
-              <Button variant="outline" size="sm" className="w-full">
-                Explore
-              </Button>
-            </div>
-            <div className="p-4 bg-white rounded-lg">
-              <div className="text-3xl mb-2">💡</div>
-              <p className="font-bold text-primary mb-1">Teaching Tips</p>
-              <p className="text-sm text-gray-600 mb-3">Best practices & guides</p>
-              <Button variant="outline" size="sm" className="w-full">
-                Learn
-              </Button>
-            </div>
-          </div>
-        </Card>
-      </motion.div>
       </div>
     </div>
   );

@@ -28,6 +28,8 @@ const TeacherDashboard = lazy(() => import('../features/teacher/pages/TeacherDas
 const StudentsPage = lazy(() => import('../features/teacher/pages/StudentsPage'));
 const CreateTestPage = lazy(() => import('../features/teacher/pages/CreateTestPage'));
 const TeacherAnalyticsPage = lazy(() => import('../features/teacher/pages/TeacherAnalyticsPage'));
+const TeacherTestResultsPage = lazy(() => import('../features/teacher/pages/TeacherTestResultsPage'));
+const NotesPage = lazy(() => import('../features/teacher/pages/NotesPage'));
 const ClassesPage = lazy(() => import('../features/teacher/pages/ClassesPage'));
 const ClassDetailPage = lazy(() => import('../features/teacher/pages/ClassDetailPage'));
 const MyClassesPage = lazy(() => import('../features/student/pages/MyClassesPage'));
@@ -93,6 +95,26 @@ export const AppRouter = () => {
             <ProtectedRoute requireTeacher>
               <Suspense fallback={<LoadingFallback />}>
                 <TeacherAnalyticsPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/test-results"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <TeacherTestResultsPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/notes"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <NotesPage />
               </Suspense>
             </ProtectedRoute>
           }

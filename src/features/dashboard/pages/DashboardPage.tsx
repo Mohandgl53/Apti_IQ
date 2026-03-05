@@ -146,10 +146,8 @@ export const DashboardPage = () => {
 
   return (
     <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
-      {/* Left Navigation - Hidden on mobile, shown in hamburger menu */}
-      <div className="hidden lg:block">
-        <DashboardNav />
-      </div>
+      {/* Left Navigation - Sidebar hidden on mobile, but floating button always visible */}
+      <DashboardNav />
 
       {/* Main Content */}
       <div className="flex-1 space-y-4 sm:space-y-6 lg:space-y-8 px-3 sm:px-4 lg:px-0 pb-20 lg:pb-8">

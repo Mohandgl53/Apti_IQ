@@ -73,10 +73,8 @@ const BadgesStreaksPage = () => {
 
   return (
     <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
-      {/* Left Navigation - Hidden on mobile, shown in hamburger menu */}
-      <div className="hidden lg:block">
-        <DashboardNav />
-      </div>
+      {/* Left Navigation - Sidebar hidden on mobile, but floating button always visible */}
+      <DashboardNav />
 
       {/* Main Content */}
       <div className="flex-1 space-y-4 sm:space-y-6 px-3 sm:px-4 lg:px-0 pb-20 lg:pb-8">
@@ -124,7 +122,7 @@ const BadgesStreaksPage = () => {
             animate={{ opacity: 1, y: 0 }}
           >
             <Card>
-              <h2 className="text-2xl font-bold text-primary mb-4">✨ Earned Badges</h2>
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold text-primary mb-4">✨ Earned Badges</h2>
               <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {earnedBadges.map((badge, index) => (
                   <motion.div
@@ -135,8 +133,8 @@ const BadgesStreaksPage = () => {
                     className={`p-4 rounded-lg border-2 ${getRarityBorder(badge.rarity)} bg-white hover:shadow-lg transition-all cursor-pointer`}
                   >
                     <div className="text-center">
-                      <div className="text-5xl mb-2">{badge.icon}</div>
-                      <h3 className="font-bold text-primary mb-1">{badge.name}</h3>
+                      <div className="text-4xl sm:text-5xl mb-2">{badge.icon}</div>
+                      <h3 className="text-sm sm:text-base font-bold text-primary mb-1">{badge.name}</h3>
                       <p className="text-xs text-gray-600 mb-2">{badge.description}</p>
                       <Badge variant="success" className="text-xs">
                         {new Date(badge.earnedAt!).toLocaleDateString()}
@@ -158,7 +156,7 @@ const BadgesStreaksPage = () => {
             transition={{ delay: 0.2 }}
           >
             <Card className="bg-gray-50">
-              <h2 className="text-2xl font-bold text-primary mb-4">🔒 Locked Badges</h2>
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold text-primary mb-4">🔒 Locked Badges</h2>
               <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {lockedBadges.map((badge, index) => (
                   <motion.div
@@ -169,8 +167,8 @@ const BadgesStreaksPage = () => {
                     className={`p-4 rounded-lg border-2 ${getRarityBorder(badge.rarity)} bg-white opacity-60 hover:opacity-80 transition-all`}
                   >
                     <div className="text-center">
-                      <div className="text-5xl mb-2 grayscale">{badge.icon}</div>
-                      <h3 className="font-bold text-gray-700 mb-1">{badge.name}</h3>
+                      <div className="text-4xl sm:text-5xl mb-2 grayscale">{badge.icon}</div>
+                      <h3 className="text-sm sm:text-base font-bold text-gray-700 mb-1">{badge.name}</h3>
                       <p className="text-xs text-gray-600 mb-2">{badge.description}</p>
                       {badge.progress !== undefined && badge.total !== undefined && (
                         <div className="mt-2">
@@ -213,18 +211,18 @@ const BadgesStreaksPage = () => {
               >
                 <Card className="bg-gradient-to-br from-orange-50 to-red-50 border-2 border-orange-200">
                   <div className="flex items-start gap-4">
-                    <div className="text-6xl">{streak.icon}</div>
+                    <div className="text-4xl sm:text-5xl lg:text-6xl">{streak.icon}</div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-primary mb-1">{streak.type}</h3>
+                      <h3 className="text-base sm:text-lg lg:text-xl font-bold text-primary mb-1">{streak.type}</h3>
                       <p className="text-sm text-gray-600 mb-4">{streak.description}</p>
                       
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-white rounded-lg p-3 text-center">
-                          <p className="text-3xl font-bold text-orange-600">{streak.current}</p>
+                          <p className="text-2xl sm:text-3xl font-bold text-orange-600">{streak.current}</p>
                           <p className="text-xs text-gray-600 mt-1">Current Streak</p>
                         </div>
                         <div className="bg-white rounded-lg p-3 text-center">
-                          <p className="text-3xl font-bold text-purple-600">{streak.longest}</p>
+                          <p className="text-2xl sm:text-3xl font-bold text-purple-600">{streak.longest}</p>
                           <p className="text-xs text-gray-600 mt-1">Longest Streak</p>
                         </div>
                       </div>
@@ -243,10 +241,10 @@ const BadgesStreaksPage = () => {
             ))}
           </div>
 
-          {/* Streak Tips */}
+          {/* Featured Prizes Section */}
           <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
-            <h3 className="text-xl font-bold text-primary mb-4">💡 Streak Tips</h3>
-            <ul className="space-y-2 text-gray-700">
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-primary mb-4">💡 Streak Tips</h3>
+            <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
               <li className="flex items-start gap-2">
                 <span className="text-secondary mt-1">•</span>
                 <span>Log in daily to maintain your login streak</span>

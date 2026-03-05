@@ -47,9 +47,6 @@ export const Navbar = () => {
                   <Link to="/teacher/students" className={navLinkClass('/teacher/students')}>
                     Students
                   </Link>
-                  <Link to="/teacher/analytics" className={navLinkClass('/teacher/analytics')}>
-                    Analytics
-                  </Link>
                 </>
               ) : (
                 <>
@@ -192,13 +189,34 @@ export const Navbar = () => {
                   >
                     👥 Students
                   </Link>
-                  <Link
-                    to="/teacher/analytics"
-                    className={mobileNavLinkClass('/teacher/analytics')}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    📈 Analytics
-                  </Link>
+                  
+                  {/* Dashboard Sub-menu */}
+                  <div className="pt-2 mt-2 border-t border-gray-200">
+                    <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                      Dashboard Menu
+                    </div>
+                    <Link
+                      to="/teacher/test-results"
+                      className={mobileNavLinkClass('/teacher/test-results')}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      📋 Test Results
+                    </Link>
+                    <Link
+                      to="/teacher/notes"
+                      className={mobileNavLinkClass('/teacher/notes')}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      📝 Notes & Updates
+                    </Link>
+                    <Link
+                      to="/teacher/analytics"
+                      className={mobileNavLinkClass('/teacher/analytics')}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      📈 Student Analytics
+                    </Link>
+                  </div>
                 </>
               ) : (
                 <>
@@ -244,6 +262,34 @@ export const Navbar = () => {
                   >
                     👑 Leaderboard
                   </Link>
+                  
+                  {/* Dashboard Sub-menu */}
+                  <div className="pt-2 mt-2 border-t border-gray-200">
+                    <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                      Dashboard Menu
+                    </div>
+                    <Link
+                      to="/analytics"
+                      className={mobileNavLinkClass('/analytics')}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      📈 Analytics
+                    </Link>
+                    <Link
+                      to="/badges"
+                      className={mobileNavLinkClass('/badges')}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      🏅 Badges & Streaks
+                    </Link>
+                    <Link
+                      to="/tournaments"
+                      className={mobileNavLinkClass('/tournaments')}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      🏆 Tournaments
+                    </Link>
+                  </div>
                 </>
               )}
               

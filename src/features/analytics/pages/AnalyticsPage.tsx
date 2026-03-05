@@ -99,8 +99,8 @@ const AnalyticsPage = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-4xl font-bold text-primary">Analytics</h1>
+    <div className="space-y-6 sm:space-y-8">
+      <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-primary">Analytics</h1>
 
       {/* Key Metrics */}
       <div className="grid md:grid-cols-4 gap-6">
@@ -145,9 +145,9 @@ const AnalyticsPage = () => {
         <ChartContainer title="Recent Trends">
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
-              <p className="text-6xl mb-4">📈</p>
-              <p className="text-gray-600">Your performance is improving!</p>
-              <p className="text-2xl font-bold text-green-600 mt-2">+12% this week</p>
+              <p className="text-4xl sm:text-5xl lg:text-6xl mb-4">📈</p>
+              <p className="text-sm sm:text-base text-gray-600">Your performance is improving!</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-600 mt-2">+12% this week</p>
             </div>
           </div>
         </ChartContainer>
