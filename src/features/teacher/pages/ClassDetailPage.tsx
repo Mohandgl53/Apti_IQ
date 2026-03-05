@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Input } from '../../../shared/ui/Input';
-import { Badge } from '../../../shared/ui/Badge';
 import { useToast } from '../../../shared/hooks/useToast';
 import { Modal } from '../../../shared/ui/Modal';
 import { TeacherNav } from '../components/TeacherNav';
