@@ -142,13 +142,6 @@ const StudentAnalyticsPage = () => {
     return 'bg-red-500';
   };
 
-  const getScoreBadge = (score: number) => {
-    if (score >= 85) return 'success';
-    if (score >= 70) return 'primary';
-    if (score >= 60) return 'warning';
-    return 'danger';
-  };
-
   const getTestTypeIcon = (type: string) => {
     if (type === 'Mock Test') return '🏢';
     if (type === 'Practice Test') return '📝';

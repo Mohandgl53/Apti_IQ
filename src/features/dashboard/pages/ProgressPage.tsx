@@ -1,7 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { api } from '../../../services/api';
-import { QUERY_KEYS } from '../../../shared/constants';
 import { Card } from '../../../shared/ui/Card';
 import { Badge } from '../../../shared/ui/Badge';
 import { Button } from '../../../shared/ui/Button';
@@ -10,11 +7,6 @@ import { DashboardNav } from '../components/DashboardNav';
 
 const ProgressPage = () => {
   const navigate = useNavigate();
-
-  const { data: subjects } = useQuery({
-    queryKey: [QUERY_KEYS.SUBJECTS],
-    queryFn: api.subjects.getAll,
-  });
 
   // Mock detailed lesson progress data
   const detailedProgress = [
