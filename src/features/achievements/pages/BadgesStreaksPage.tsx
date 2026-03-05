@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Card } from '../../../shared/ui/Card';
 import { Badge } from '../../../shared/ui/Badge';
+import { DashboardNav } from '../../dashboard/components/DashboardNav';
 import { useState } from 'react';
 
 interface BadgeItem {
@@ -71,7 +72,12 @@ const BadgesStreaksPage = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex gap-8">
+      {/* Left Navigation */}
+      <DashboardNav />
+
+      {/* Main Content */}
+      <div className="flex-1 space-y-6">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -259,6 +265,7 @@ const BadgesStreaksPage = () => {
           </Card>
         </motion.div>
       )}
+      </div>
     </div>
   );
 };

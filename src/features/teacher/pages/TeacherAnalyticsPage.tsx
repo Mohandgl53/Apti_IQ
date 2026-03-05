@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Card } from '../../../shared/ui/Card';
 import { Badge } from '../../../shared/ui/Badge';
+import { TeacherNav } from '../components/TeacherNav';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -91,7 +92,12 @@ export const TeacherAnalyticsPage = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex gap-8">
+      {/* Left Navigation */}
+      <TeacherNav />
+
+      {/* Main Content */}
+      <div className="flex-1 space-y-6">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -203,6 +209,7 @@ export const TeacherAnalyticsPage = () => {
           ))}
         </div>
       </Card>
+      </div>
     </div>
   );
 };

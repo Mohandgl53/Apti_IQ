@@ -28,6 +28,10 @@ const TeacherDashboard = lazy(() => import('../features/teacher/pages/TeacherDas
 const StudentsPage = lazy(() => import('../features/teacher/pages/StudentsPage'));
 const CreateTestPage = lazy(() => import('../features/teacher/pages/CreateTestPage'));
 const TeacherAnalyticsPage = lazy(() => import('../features/teacher/pages/TeacherAnalyticsPage'));
+const ClassesPage = lazy(() => import('../features/teacher/pages/ClassesPage'));
+const ClassDetailPage = lazy(() => import('../features/teacher/pages/ClassDetailPage'));
+const MyClassesPage = lazy(() => import('../features/student/pages/MyClassesPage'));
+const ClassTestsPage = lazy(() => import('../features/student/pages/ClassTestsPage'));
 
 const LoadingFallback = () => (
   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -89,6 +93,46 @@ export const AppRouter = () => {
             <ProtectedRoute requireTeacher>
               <Suspense fallback={<LoadingFallback />}>
                 <TeacherAnalyticsPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/classes"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <ClassesPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher/classes/:classId"
+          element={
+            <ProtectedRoute requireTeacher>
+              <Suspense fallback={<LoadingFallback />}>
+                <ClassDetailPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-classes"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<LoadingFallback />}>
+                <MyClassesPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/classes/:classId/tests"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<LoadingFallback />}>
+                <ClassTestsPage />
               </Suspense>
             </ProtectedRoute>
           }

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Input } from '../../../shared/ui/Input';
 import { useToast } from '../../../shared/hooks/useToast';
+import { TeacherNav } from '../components/TeacherNav';
 
 interface Question {
   id: string;
@@ -26,10 +27,18 @@ export const CreateTestPage = () => {
     endDate: '',
     endTime: '',
     isScheduled: false,
+    classId: '',
   });
+  const [classes, setClasses] = useState<any[]>([]);
   const [questions, setQuestions] = useState<Question[]>([
     { id: '1', text: '', options: ['', '', '', ''], correctAnswer: 0 },
   ]);
+
+  useEffect(() => {
+    // Load teacher's classes
+    const storedClasses = JSON.parse(localStorage.getItem('teacherClasses') || '[]');
+    setClasses(storedClasses);
+  }, []);
 
   const addQuestion = () => {
     setQuestions([
@@ -74,6 +83,12 @@ export const CreateTestPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate class selection
+    if (!testInfo.classId) {
+      toast.error('Please select a class to assign this test');
+      return;
+    }
     
     // Validate scheduling if enabled
     if (testInfo.isScheduled) {
@@ -125,7 +140,12 @@ export const CreateTestPage = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="flex gap-8">
+      {/* Left Navigation */}
+      <TeacherNav />
+
+      {/* Main Content */}
+      <div className="flex-1 max-w-4xl space-y-6">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -138,6 +158,46 @@ export const CreateTestPage = () => {
         {/* Test Info */}
         <Card>
           <h2 className="text-xl font-bold text-primary mb-4">Test Information</h2>
+          
+          {/* Class Selection */}
+          <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-200 rounded-lg">
+            <label className="block text-sm font-medium text-primary mb-2">
+              Assign to Class <span className="text-red-500">*</span>
+            </label>
+            {classes.length === 0 ? (
+              <div className="text-center py-4">
+                <p className="text-sm text-gray-600 mb-3">You haven't created any classes yet</p>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => navigate('/teacher/classes')}
+                >
+                  Create a Class First
+                </Button>
+              </div>
+            ) : (
+              <>
+                <select
+                  value={testInfo.classId}
+                  onChange={(e) => setTestInfo({ ...testInfo, classId: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                  required
+                >
+                  <option value="">Select a class...</option>
+                  {classes.map((cls) => (
+                    <option key={cls.id} value={cls.id}>
+                      {cls.name} - {cls.subject} ({cls.code})
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-600 mt-2">
+                  💡 Only students who have joined this class can access this test
+                </p>
+              </>
+            )}
+          </div>
+          
           <div className="grid md:grid-cols-2 gap-4">
             <Input
               label="Test Title"
@@ -337,6 +397,7 @@ export const CreateTestPage = () => {
           </div>
         </Card>
       </form>
+      </div>
     </div>
   );
 };

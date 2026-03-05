@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
-import { Input } from '../../../shared/ui/Input';
 import { useToast } from '../../../shared/hooks/useToast';
 import { mockApi } from '../../../services/mockApi';
 import type { Subject, Chapter } from '../../../shared/types';
@@ -13,26 +12,36 @@ interface TestType {
   name: string;
   icon: string;
   description: string;
-  duration: string;
-  questions: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
+  quote: string;
+}
+
+interface Company {
+  id: string;
+  name: string;
+  logo: string;
+  testsCount: number;
 }
 
 const TestSelectionPage = () => {
   const navigate = useNavigate();
   const toast = useToast();
+  const subjectSectionRef = useRef<HTMLDivElement>(null);
+  const companySectionRef = useRef<HTMLDivElement>(null);
+  const proceedSectionRef = useRef<HTMLDivElement>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [testCode, setTestCode] = useState('');
-  const [showCodeInput, setShowCodeInput] = useState(false);
   const [showSubjectSelection, setShowSubjectSelection] = useState(false);
+  const [showCompanySelection, setShowCompanySelection] = useState(false);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [chapters, setChapters] = useState<Chapter[]>([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
+  const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadSubjects();
+    loadCompanies();
   }, []);
 
   const loadSubjects = async () => {
@@ -42,6 +51,25 @@ const TestSelectionPage = () => {
     } catch (error) {
       console.error('Failed to load subjects:', error);
     }
+  };
+
+  const loadCompanies = async () => {
+    // Mock company data
+    const mockCompanies: Company[] = [
+      { id: '1', name: 'Google', logo: '🔍', testsCount: 45 },
+      { id: '2', name: 'Microsoft', logo: '🪟', testsCount: 38 },
+      { id: '3', name: 'Amazon', logo: '📦', testsCount: 52 },
+      { id: '4', name: 'Apple', logo: '🍎', testsCount: 31 },
+      { id: '5', name: 'Meta', logo: '👥', testsCount: 29 },
+      { id: '6', name: 'Netflix', logo: '🎬', testsCount: 22 },
+      { id: '7', name: 'Tesla', logo: '⚡', testsCount: 18 },
+      { id: '8', name: 'IBM', logo: '💼', testsCount: 35 },
+      { id: '9', name: 'Oracle', logo: '🔴', testsCount: 27 },
+      { id: '10', name: 'Adobe', logo: '🎨', testsCount: 24 },
+      { id: '11', name: 'Salesforce', logo: '☁️', testsCount: 20 },
+      { id: '12', name: 'Intel', logo: '🔷', testsCount: 26 },
+    ];
+    setCompanies(mockCompanies);
   };
 
   const loadChapters = async (subjectId: string) => {
@@ -61,35 +89,54 @@ const TestSelectionPage = () => {
       id: 'practice',
       name: 'Practice Test',
       icon: '📝',
-      description: 'Quick practice with 15 questions',
-      duration: '20 minutes',
-      questions: '15 questions',
-      difficulty: 'Easy',
+      description: 'Practice selected subjects and lessons',
+      quote: '"Practice is the hardest part of learning, and training is the essence of transformation." - Ann Voskamp',
     },
     {
       id: 'mock',
       name: 'Mock Test',
       icon: '🎯',
-      description: 'Full-length test with all subjects',
-      duration: '60 minutes',
-      questions: '50 questions',
-      difficulty: 'Medium',
+      description: 'Real questions asked by different companies',
+      quote: '"Success is where preparation and opportunity meet." - Bobby Unser',
     },
     {
       id: 'advanced',
       name: 'Advanced Test',
       icon: '🚀',
-      description: 'Challenging test for experts',
-      duration: '90 minutes',
-      questions: '75 questions',
-      difficulty: 'Hard',
+      description: 'Comprehensive test covering all concepts',
+      quote: '"The expert in anything was once a beginner who refused to give up." - Anonymous',
     },
   ];
 
   const handleSelectTest = (typeId: string) => {
     setSelectedType(typeId);
-    setShowCodeInput(false);
-    setShowSubjectSelection(true);
+    
+    // Reset selections
+    setShowSubjectSelection(false);
+    setShowCompanySelection(false);
+    setSelectedSubject(null);
+    setSelectedChapters([]);
+    setSelectedCompany(null);
+    
+    if (typeId === 'practice') {
+      // Practice test: show subject selection
+      setShowSubjectSelection(true);
+      setTimeout(() => {
+        subjectSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else if (typeId === 'mock') {
+      // Mock test: show company selection
+      setShowCompanySelection(true);
+      setTimeout(() => {
+        companySectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else if (typeId === 'advanced') {
+      // Advanced test: scroll to proceed button
+      setTimeout(() => {
+        proceedSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+    // Advanced test: just set the type, show proceed button at bottom
   };
 
   const handleSubjectSelect = (subjectId: string) => {
@@ -114,128 +161,100 @@ const TestSelectionPage = () => {
     setSelectedChapters([]);
   };
 
-  const handleJoinWithCode = () => {
-    if (!testCode.trim()) {
-      toast.error('Please enter a test code');
-      return;
-    }
-
-    // Validate test code format (e.g., ABC-123-XYZ)
-    const codePattern = /^[A-Z]{3}-\d{3}-[A-Z]{3}$/;
-    if (!codePattern.test(testCode.toUpperCase())) {
-      toast.error('Invalid test code format. Use format: ABC-123-XYZ');
-      return;
-    }
-
-    // Store test code in session storage
-    sessionStorage.setItem('testCode', testCode.toUpperCase());
-    toast.success('Test code validated! Proceeding to instructions...');
-    
-    setTimeout(() => {
-      navigate('/test/instructions');
-    }, 1000);
-  };
-
   const handleProceed = () => {
     if (!selectedType) {
       toast.error('Please select a test type');
       return;
     }
 
-    if (!selectedSubject) {
-      toast.error('Please select a subject');
-      return;
+    if (selectedType === 'practice') {
+      if (!selectedSubject) {
+        toast.error('Please select a subject');
+        return;
+      }
+      if (selectedChapters.length === 0) {
+        toast.error('Please select at least one chapter/topic');
+        return;
+      }
+      // Store selected test configuration
+      sessionStorage.setItem('testType', selectedType);
+      sessionStorage.setItem('testSubject', selectedSubject);
+      sessionStorage.setItem('testChapters', JSON.stringify(selectedChapters));
+    } else if (selectedType === 'mock') {
+      if (!selectedCompany) {
+        toast.error('Please select a company');
+        return;
+      }
+      // Store selected test configuration
+      sessionStorage.setItem('testType', selectedType);
+      sessionStorage.setItem('testCompany', selectedCompany);
+    } else if (selectedType === 'advanced') {
+      // Store test type for advanced test
+      sessionStorage.setItem('testType', selectedType);
     }
-
-    if (selectedChapters.length === 0) {
-      toast.error('Please select at least one chapter/topic');
-      return;
-    }
-
-    // Store selected test configuration
-    sessionStorage.setItem('testType', selectedType);
-    sessionStorage.setItem('testSubject', selectedSubject);
-    sessionStorage.setItem('testChapters', JSON.stringify(selectedChapters));
     
     navigate('/test/instructions');
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 pb-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
           <div>
-            <h1 className="text-4xl font-bold text-primary mb-2">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-2">
               Select Test Type
             </h1>
-            <p className="text-gray-600">
+            <p className="text-sm sm:text-base text-gray-600">
               Choose a test type or join with a code
             </p>
           </div>
-          <Button variant="outline" onClick={() => navigate('/dashboard')}>
+          <Button variant="outline" onClick={() => navigate('/dashboard')} className="self-start sm:self-auto">
             ← Back
           </Button>
         </div>
       </motion.div>
 
-      {/* Join with Code Section */}
+      {/* Join with Code Section - Redirect to Classes */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
         <Card className="bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-200">
-          <div className="flex items-center gap-4">
-            <span className="text-4xl">🎓</span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <span className="text-3xl sm:text-4xl">🎓</span>
             <div className="flex-1">
-              <h2 className="text-xl font-bold text-primary mb-1">
-                Join Teacher's Test
+              <h2 className="text-lg sm:text-xl font-bold text-primary mb-1">
+                Take Teacher's Test
               </h2>
-              <p className="text-sm text-gray-600">
-                Your professor shared a test code? Enter it here to take their assigned test
+              <p className="text-xs sm:text-sm text-gray-600">
+                Join a class first to access tests assigned by your teacher
               </p>
             </div>
             <Button
               variant="secondary"
-              onClick={() => setShowCodeInput(!showCodeInput)}
+              onClick={() => navigate('/my-classes')}
+              className="w-full sm:w-auto"
             >
-              {showCodeInput ? 'Cancel' : 'Enter Code'}
+              Go to My Classes →
             </Button>
           </div>
-
-          {showCodeInput && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              className="mt-4 pt-4 border-t border-purple-200"
-            >
-              <div className="flex gap-3">
-                <Input
-                  placeholder="Enter test code (e.g., ABC-123-XYZ)"
-                  value={testCode}
-                  onChange={(e) => setTestCode(e.target.value.toUpperCase())}
-                  className="flex-1"
-                />
-                <Button variant="primary" onClick={handleJoinWithCode}>
-                  Join Test →
-                </Button>
-              </div>
-              <p className="text-xs text-gray-500 mt-2">
-                💡 Test codes are provided by your teacher/professor
-              </p>
-            </motion.div>
-          )}
+          <div className="mt-4 pt-4 border-t border-purple-200">
+            <p className="text-xs text-gray-600">
+              💡 <span className="font-medium">How it works:</span> Get a class code from your teacher → Join the class → Access tests assigned to that class
+            </p>
+          </div>
         </Card>
       </motion.div>
 
       {/* Divider */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         <div className="flex-1 h-px bg-gray-300"></div>
-        <span className="text-gray-500 font-medium">OR PRACTICE ON YOUR OWN</span>
+        <span className="text-xs sm:text-sm text-gray-500 font-medium text-center px-2">OR PRACTICE ON YOUR OWN</span>
         <div className="flex-1 h-px bg-gray-300"></div>
       </div>
 
@@ -245,13 +264,13 @@ const TestSelectionPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <h2 className="text-2xl font-bold text-primary mb-2">
+        <h2 className="text-xl sm:text-2xl font-bold text-primary mb-2">
           Self-Practice Tests
         </h2>
-        <p className="text-gray-600 mb-4">
+        <p className="text-sm sm:text-base text-gray-600 mb-4">
           Choose a test type and customize your practice session
         </p>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {testTypes.map((type, index) => (
             <motion.div
               key={type.id}
@@ -260,7 +279,7 @@ const TestSelectionPage = () => {
               transition={{ delay: 0.3 + index * 0.1 }}
             >
               <Card
-                className={`cursor-pointer transition-all hover:shadow-lg ${
+                className={`cursor-pointer transition-all hover:shadow-lg active:scale-95 ${
                   selectedType === type.id
                     ? 'border-2 border-secondary bg-secondary/5'
                     : 'border border-gray-200'
@@ -268,41 +287,18 @@ const TestSelectionPage = () => {
                 onClick={() => handleSelectTest(type.id)}
               >
                 <div className="text-center">
-                  <div className="text-5xl mb-3">{type.icon}</div>
-                  <h3 className="text-xl font-bold text-primary mb-2">
+                  <div className="text-4xl sm:text-5xl mb-3">{type.icon}</div>
+                  <h3 className="text-lg sm:text-xl font-bold text-primary mb-2">
                     {type.name}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-4">
+                  <p className="text-xs sm:text-sm text-gray-600 mb-4">
                     {type.description}
                   </p>
 
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded">
-                      <span className="text-gray-600">⏱️ Duration:</span>
-                      <span className="font-medium text-primary">
-                        {type.duration}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded">
-                      <span className="text-gray-600">📝 Questions:</span>
-                      <span className="font-medium text-primary">
-                        {type.questions}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded">
-                      <span className="text-gray-600">🎚️ Difficulty:</span>
-                      <span
-                        className={`font-medium ${
-                          type.difficulty === 'Easy'
-                            ? 'text-green-600'
-                            : type.difficulty === 'Medium'
-                            ? 'text-orange-600'
-                            : 'text-red-600'
-                        }`}
-                      >
-                        {type.difficulty}
-                      </span>
-                    </div>
+                  <div className="p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
+                    <p className="text-xs italic text-gray-700 leading-relaxed">
+                      {type.quote}
+                    </p>
                   </div>
 
                   {selectedType === type.id && (
@@ -323,29 +319,30 @@ const TestSelectionPage = () => {
         </div>
       </motion.div>
 
-      {/* Subject Selection */}
-      {showSubjectSelection && (
+      {/* Subject Selection - Only for Practice Test */}
+      {showSubjectSelection && selectedType === 'practice' && (
         <motion.div
+          ref={subjectSectionRef}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200">
-            <h2 className="text-2xl font-bold text-primary mb-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-primary mb-4">
               📚 Select Subject
             </h2>
-            <div className="grid md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
               {subjects.map((subject) => (
                 <div
                   key={subject.id}
                   onClick={() => handleSubjectSelect(subject.id)}
-                  className={`p-4 rounded-lg cursor-pointer transition-all hover:shadow-md ${
+                  className={`p-3 sm:p-4 rounded-lg cursor-pointer transition-all hover:shadow-md active:scale-95 ${
                     selectedSubject === subject.id
                       ? 'bg-secondary text-white border-2 border-secondary'
                       : 'bg-white border border-gray-200'
                   }`}
                 >
-                  <div className="text-3xl mb-2">{subject.icon}</div>
-                  <p className={`font-bold mb-1 ${selectedSubject === subject.id ? 'text-white' : 'text-primary'}`}>
+                  <div className="text-2xl sm:text-3xl mb-2">{subject.icon}</div>
+                  <p className={`font-bold mb-1 text-sm sm:text-base ${selectedSubject === subject.id ? 'text-white' : 'text-primary'}`}>
                     {subject.name}
                   </p>
                   <p className={`text-xs ${selectedSubject === subject.id ? 'text-white/80' : 'text-gray-600'}`}>
@@ -358,15 +355,15 @@ const TestSelectionPage = () => {
         </motion.div>
       )}
 
-      {/* Chapter Selection */}
-      {selectedSubject && (
+      {/* Chapter Selection - Only for Practice Test */}
+      {selectedSubject && selectedType === 'practice' && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <Card className="bg-gradient-to-r from-green-50 to-teal-50 border-2 border-green-200">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-primary">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-primary">
                 📖 Select Topics/Chapters
               </h2>
               <div className="flex gap-2">
@@ -382,15 +379,15 @@ const TestSelectionPage = () => {
             {loading ? (
               <div className="text-center py-8">
                 <div className="animate-spin w-8 h-8 border-4 border-secondary border-t-transparent rounded-full mx-auto"></div>
-                <p className="text-gray-600 mt-2">Loading chapters...</p>
+                <p className="text-sm sm:text-base text-gray-600 mt-2">Loading chapters...</p>
               </div>
             ) : (
-              <div className="grid md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {chapters.map((chapter) => (
                   <div
                     key={chapter.id}
                     onClick={() => toggleChapter(chapter.id)}
-                    className={`p-3 rounded-lg cursor-pointer transition-all border-2 ${
+                    className={`p-3 rounded-lg cursor-pointer transition-all border-2 active:scale-95 ${
                       selectedChapters.includes(chapter.id)
                         ? 'bg-green-100 border-green-500'
                         : 'bg-white border-gray-200 hover:border-green-300'
@@ -427,23 +424,90 @@ const TestSelectionPage = () => {
         </motion.div>
       )}
 
-      {/* Proceed Button */}
-      {selectedType && selectedSubject && selectedChapters.length > 0 && (
+      {/* Company Selection - Only for Mock Test */}
+      {showCompanySelection && selectedType === 'mock' && (
         <motion.div
+          ref={companySectionRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <Card className="bg-gradient-to-r from-orange-50 to-red-50 border-2 border-orange-200">
+            <h2 className="text-xl sm:text-2xl font-bold text-primary mb-4">
+              🏢 Select Company
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 mb-4">
+              Choose a company to practice their previous test questions
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+              {companies.map((company) => (
+                <div
+                  key={company.id}
+                  onClick={() => setSelectedCompany(company.id)}
+                  className={`p-3 sm:p-4 rounded-lg cursor-pointer transition-all hover:shadow-md active:scale-95 ${
+                    selectedCompany === company.id
+                      ? 'bg-secondary text-white border-2 border-secondary'
+                      : 'bg-white border border-gray-200'
+                  }`}
+                >
+                  <div className="text-2xl sm:text-3xl mb-2">{company.logo}</div>
+                  <p className={`font-bold mb-1 text-sm sm:text-base ${selectedCompany === company.id ? 'text-white' : 'text-primary'}`}>
+                    {company.name}
+                  </p>
+                  <p className={`text-xs ${selectedCompany === company.id ? 'text-white/80' : 'text-gray-600'}`}>
+                    {company.testsCount} questions
+                  </p>
+                </div>
+              ))}
+            </div>
+            
+            {selectedCompany && (
+              <div className="mt-4 p-3 bg-white rounded-lg border border-orange-300">
+                <p className="text-sm text-gray-700">
+                  <span className="font-bold text-orange-600">
+                    {companies.find(c => c.id === selectedCompany)?.name}
+                  </span> selected
+                </p>
+              </div>
+            )}
+          </Card>
+        </motion.div>
+      )}
+
+      {/* Proceed Button */}
+      {((selectedType === 'practice' && selectedSubject && selectedChapters.length > 0) ||
+        (selectedType === 'mock' && selectedCompany) ||
+        (selectedType === 'advanced')) && (
+        <motion.div
+          ref={proceedSectionRef}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <Card className="bg-gradient-to-r from-primary/5 to-secondary/5">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h3 className="font-bold text-primary mb-1">Ready to start?</h3>
-                <p className="text-sm text-gray-600">
-                  {testTypes.find((t) => t.id === selectedType)?.name} •{' '}
-                  {subjects.find((s) => s.id === selectedSubject)?.name} •{' '}
-                  {selectedChapters.length} chapter(s)
+                <h3 className="text-base sm:text-lg font-bold text-primary mb-1">Ready to start?</h3>
+                <p className="text-xs sm:text-sm text-gray-600">
+                  {testTypes.find((t) => t.id === selectedType)?.name}
+                  {selectedType === 'practice' && (
+                    <>
+                      {' • '}
+                      {subjects.find((s) => s.id === selectedSubject)?.name}
+                      {' • '}
+                      {selectedChapters.length} chapter(s)
+                    </>
+                  )}
+                  {selectedType === 'mock' && (
+                    <>
+                      {' • '}
+                      {companies.find((c) => c.id === selectedCompany)?.name}
+                    </>
+                  )}
+                  {selectedType === 'advanced' && (
+                    <> • All concepts covered</>
+                  )}
                 </p>
               </div>
-              <Button variant="primary" size="lg" onClick={handleProceed}>
+              <Button variant="primary" size="lg" onClick={handleProceed} className="w-full sm:w-auto">
                 Continue to Instructions →
               </Button>
             </div>

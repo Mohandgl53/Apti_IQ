@@ -149,6 +149,7 @@ export const RegisterPage = () => {
               type="password"
               placeholder="••••••••"
               error={errors.password?.message}
+              showPasswordToggle
               {...register('password')}
             />
 
@@ -157,6 +158,7 @@ export const RegisterPage = () => {
               type="password"
               placeholder="••••••••"
               error={errors.confirmPassword?.message}
+              showPasswordToggle
               {...register('confirmPassword')}
             />
 

@@ -38,14 +38,8 @@ export const Navbar = () => {
                   <Link to="/teacher/dashboard" className={navLinkClass('/teacher/dashboard')}>
                     Dashboard
                   </Link>
-                  <Link to="/teacher/students" className={navLinkClass('/teacher/students')}>
-                    Students
-                  </Link>
-                  <Link to="/teacher/create-test" className={navLinkClass('/teacher/create-test')}>
-                    Create Test
-                  </Link>
-                  <Link to="/teacher/analytics" className={navLinkClass('/teacher/analytics')}>
-                    Analytics
+                  <Link to="/teacher/classes" className={navLinkClass('/teacher/classes')}>
+                    Classes
                   </Link>
                 </>
               ) : (
@@ -53,20 +47,11 @@ export const Navbar = () => {
                   <Link to="/dashboard" className={navLinkClass('/dashboard')}>
                     Dashboard
                   </Link>
-                  <Link to="/subjects" className={navLinkClass('/subjects')}>
-                    Learn
+                  <Link to="/my-classes" className={navLinkClass('/my-classes')}>
+                    My Classes
                   </Link>
                   <Link to="/test" className={navLinkClass('/test')}>
                     Test
-                  </Link>
-                  <Link to="/badges" className={navLinkClass('/badges')}>
-                    Badges
-                  </Link>
-                  <Link to="/tournaments" className={navLinkClass('/tournaments')}>
-                    Tournaments
-                  </Link>
-                  <Link to="/leaderboard" className={navLinkClass('/leaderboard')}>
-                    Leaderboard
                   </Link>
                 </>
               )}
@@ -169,25 +154,11 @@ export const Navbar = () => {
                     📊 Dashboard
                   </Link>
                   <Link
-                    to="/teacher/students"
-                    className={mobileNavLinkClass('/teacher/students')}
+                    to="/teacher/classes"
+                    className={mobileNavLinkClass('/teacher/classes')}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    👥 Students
-                  </Link>
-                  <Link
-                    to="/teacher/create-test"
-                    className={mobileNavLinkClass('/teacher/create-test')}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🧪 Create Test
-                  </Link>
-                  <Link
-                    to="/teacher/analytics"
-                    className={mobileNavLinkClass('/teacher/analytics')}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    📈 Analytics
+                    👥 Classes
                   </Link>
                 </>
               ) : (
@@ -200,11 +171,11 @@ export const Navbar = () => {
                     📊 Dashboard
                   </Link>
                   <Link
-                    to="/subjects"
-                    className={mobileNavLinkClass('/subjects')}
+                    to="/my-classes"
+                    className={mobileNavLinkClass('/my-classes')}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    📚 Learn
+                    📚 My Classes
                   </Link>
                   <Link
                     to="/test"
@@ -212,27 +183,6 @@ export const Navbar = () => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     📝 Test
-                  </Link>
-                  <Link
-                    to="/badges"
-                    className={mobileNavLinkClass('/badges')}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🏆 Badges & Streaks
-                  </Link>
-                  <Link
-                    to="/tournaments"
-                    className={mobileNavLinkClass('/tournaments')}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🏆 Tournaments
-                  </Link>
-                  <Link
-                    to="/leaderboard"
-                    className={mobileNavLinkClass('/leaderboard')}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    🏅 Leaderboard
                   </Link>
                 </>
               )}

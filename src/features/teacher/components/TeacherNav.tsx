@@ -1,18 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Card } from '../../../shared/ui/Card';
 
-export const DashboardNav = () => {
+export const TeacherNav = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/dashboard', label: 'Overview', icon: '📊' },
-    { path: '/my-classes', label: 'My Classes', icon: '📚' },
-    { path: '/subjects', label: 'Learn', icon: '📖' },
-    { path: '/test', label: 'Tests', icon: '📝' },
-    { path: '/progress', label: 'Progress', icon: '📈' },
-    { path: '/badges', label: 'Badges & Streaks', icon: '🏅' },
-    { path: '/tournaments', label: 'Tournaments', icon: '🏆' },
-    { path: '/leaderboard', label: 'Leaderboard', icon: '👑' },
+    { path: '/teacher/dashboard', label: 'Overview', icon: '📊' },
+    { path: '/teacher/classes', label: 'My Classes', icon: '👥' },
+    { path: '/teacher/create-test', label: 'Create Test', icon: '🧪' },
+    { path: '/teacher/students', label: 'Students', icon: '👨‍🎓' },
+    { path: '/teacher/analytics', label: 'Analytics', icon: '📈' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -21,7 +18,7 @@ export const DashboardNav = () => {
     <div className="w-64 sticky top-20">
       <Card className="p-4">
         <h3 className="font-bold text-primary mb-4 text-sm uppercase tracking-wide">
-          Quick Navigation
+          Teacher Menu
         </h3>
         <div className="space-y-1">
           {navItems.map((item) => (
@@ -41,9 +38,9 @@ export const DashboardNav = () => {
         </div>
 
         {/* Tips */}
-        <div className="mt-6 p-3 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+        <div className="mt-6 p-3 bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg border border-purple-200">
           <p className="text-xs text-gray-700">
-            💡 <span className="font-medium">Tip:</span> Maintain your daily streak by practicing regularly!
+            💡 <span className="font-medium">Tip:</span> Create classes first, then assign tests to them.
           </p>
         </div>
       </Card>

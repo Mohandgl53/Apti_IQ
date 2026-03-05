@@ -7,6 +7,7 @@ import { StatCard } from '../../../shared/ui/StatCard';
 import { Badge } from '../../../shared/ui/Badge';
 import { useAuthStore } from '../../auth/store/authStore';
 import { useToast } from '../../../shared/hooks/useToast';
+import { TeacherNav } from '../components/TeacherNav';
 
 export const TeacherDashboard = () => {
   const navigate = useNavigate();
@@ -43,7 +44,12 @@ export const TeacherDashboard = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="flex gap-8">
+      {/* Left Navigation */}
+      <TeacherNav />
+
+      {/* Main Content */}
+      <div className="flex-1 space-y-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -130,7 +136,14 @@ export const TeacherDashboard = () => {
       >
         <Card className="bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-200">
           <h2 className="text-xl font-bold text-primary mb-4">⚡ Quick Actions</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
+            <Button
+              variant="outline"
+              className="w-full justify-start"
+              onClick={() => navigate('/teacher/classes')}
+            >
+              <span className="mr-2">👥</span> Manage Classes
+            </Button>
             <Button
               variant="outline"
               className="w-full justify-start"
@@ -148,7 +161,7 @@ export const TeacherDashboard = () => {
           </div>
           <div className="mt-4 p-3 bg-white rounded-lg border border-purple-200">
             <p className="text-sm text-gray-700">
-              💡 <span className="font-medium">Tip:</span> Create tests and share the generated code with your students. They'll use it to join and take your test.
+              💡 <span className="font-medium">Tip:</span> Create classes first, then assign tests to those classes. Students must join a class to access your tests.
             </p>
           </div>
         </Card>
@@ -363,6 +376,7 @@ export const TeacherDashboard = () => {
           </div>
         </Card>
       </motion.div>
+      </div>
     </div>
   );
 };

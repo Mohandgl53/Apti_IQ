@@ -139,8 +139,6 @@ export const DashboardPage = () => {
   }
 
   const hasActivity = stats?.recentActivity && stats.recentActivity.length > 0;
-  const hasBadges = stats?.badges && stats.badges.length > 0;
-  const hasStreak = (stats?.currentStreak || 0) > 0;
   const recommendation = getRecommendation(stats);
   
   // Calculate user rank percentile (mock for now)
@@ -236,10 +234,10 @@ export const DashboardPage = () => {
                       transition={{ delay: 0.4 }}
                       className="text-4xl font-bold text-primary mb-2"
                     >
-                      {hasStreak ? stats?.currentStreak : 0}
+                      {stats?.currentStreak || 0}
                       <span className="text-xl text-gray-600"> days</span>
                     </motion.p>
-                    {hasStreak && (
+                    {(stats?.currentStreak || 0) > 0 && (
                       <p className="text-xs text-orange-600 font-medium">
                         🔥 Keep it alive today
                       </p>
@@ -475,63 +473,9 @@ export const DashboardPage = () => {
         </div>
       </motion.div>
 
-      {/* 🎯 STRATEGIC SECTION 3: PROGRESS & RECOGNITION (Habit Loop Reward) */}
-      <div className="grid lg:grid-cols-2 gap-8">
-        {/* Achievements - Gamification with forward motivation */}
-        <Card>
-          <h2 className="text-xl font-semibold text-primary mb-6">Your Progress</h2>
-          
-          {hasBadges ? (
-            <>
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                {stats?.badges.map((badge, i) => (
-                  <motion.div
-                    key={badge.id}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4 + i * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -4 }}
-                    className="text-center p-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg hover:shadow-md transition-smooth cursor-pointer group"
-                    title={badge.description}
-                  >
-                    <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">
-                      {badge.icon}
-                    </div>
-                    <p className="text-xs font-medium text-primary">{badge.name}</p>
-                  </motion.div>
-                ))}
-              </div>
-              
-              {/* Next achievement - Forward motivation */}
-              {stats.badges.length < 5 && (
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">🎯</span>
-                    <div>
-                      <p className="font-semibold text-primary">Next Milestone</p>
-                      <p className="text-sm text-gray-700">
-                        Complete <strong>3 more tests</strong> to unlock <strong>Week Warrior</strong>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-4xl mb-4">🏆</p>
-              <p className="text-gray-700 font-medium mb-2">Start your journey</p>
-              <p className="text-sm text-gray-600 mb-6">
-                Complete your first test to earn your first achievement
-              </p>
-              <Button variant="primary" onClick={() => navigate('/test')}>
-                Take First Test
-              </Button>
-            </div>
-          )}
-        </Card>
-
-        {/* Recent Activity - Optional exploration */}
+      {/* 🎯 STRATEGIC SECTION 3: RECENT ACTIVITY */}
+      <div>
+        {/* Recent Activity */}
         <Card>
           <h2 className="text-xl font-semibold text-primary mb-6">Recent Activity</h2>
           

@@ -4,6 +4,7 @@ import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Badge } from '../../../shared/ui/Badge';
 import { Input } from '../../../shared/ui/Input';
+import { TeacherNav } from '../components/TeacherNav';
 
 interface Student {
   id: string;
@@ -36,7 +37,12 @@ export const StudentsPage = () => {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="flex gap-8">
+      {/* Left Navigation */}
+      <TeacherNav />
+
+      {/* Main Content */}
+      <div className="flex-1 space-y-6">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -164,6 +170,7 @@ export const StudentsPage = () => {
           </div>
         )}
       </Card>
+      </div>
     </div>
   );
 };
