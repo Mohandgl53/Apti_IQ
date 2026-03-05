@@ -16,6 +16,31 @@ export default {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'sans-serif'],
         heading: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
       },
+      fontSize: {
+        'xs': ['0.7rem', { lineHeight: '1rem' }],      // 11.2px
+        'sm': ['0.8125rem', { lineHeight: '1.25rem' }], // 13px
+        'base': ['0.875rem', { lineHeight: '1.5rem' }], // 14px
+        'lg': ['1rem', { lineHeight: '1.5rem' }],       // 16px
+        'xl': ['1.125rem', { lineHeight: '1.75rem' }],  // 18px
+        '2xl': ['1.25rem', { lineHeight: '1.75rem' }],  // 20px
+        '3xl': ['1.5rem', { lineHeight: '2rem' }],      // 24px
+        '4xl': ['1.875rem', { lineHeight: '2.25rem' }], // 30px
+        '5xl': ['2.25rem', { lineHeight: '2.5rem' }],   // 36px
+      },
+      spacing: {
+        '0.5': '0.1rem',   // 1.6px
+        '1': '0.2rem',     // 3.2px
+        '1.5': '0.3rem',   // 4.8px
+        '2': '0.4rem',     // 6.4px
+        '2.5': '0.5rem',   // 8px
+        '3': '0.6rem',     // 9.6px
+        '4': '0.8rem',     // 12.8px
+        '5': '1rem',       // 16px
+        '6': '1.2rem',     // 19.2px
+        '8': '1.6rem',     // 25.6px
+        '10': '2rem',      // 32px
+        '12': '2.4rem',    // 38.4px
+      },
       boxShadow: {
         'paper': '0 1px 3px rgba(0, 0, 0, 0.06)',
         'card': '0 2px 6px rgba(0, 0, 0, 0.08)',

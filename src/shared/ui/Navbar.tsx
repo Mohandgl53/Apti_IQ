@@ -23,16 +23,16 @@ export const Navbar = () => {
 
   return (
     <nav className="bg-[#FEFDFB] shadow-sm sticky top-0 z-30 border-b border-[#E5DDD0]">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+      <div className="container mx-auto px-3 sm:px-4">
+        <div className="flex items-center justify-between h-12 sm:h-14">
           {/* Left: Logo */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-smooth">
-            <img src="/logo.svg" alt="AptIQ Logo" className="h-10" />
+            <img src="/logo.svg" alt="AptIQ Logo" className="h-8 sm:h-9" />
           </Link>
 
           {/* Center: Desktop Navigation */}
           {isAuthenticated && (
-            <div className="hidden lg:flex items-center space-x-6">
+            <div className="hidden lg:flex items-center space-x-4 text-sm">
               {user?.role === 'teacher' ? (
                 <>
                   <Link to="/teacher/dashboard" className={navLinkClass('/teacher/dashboard')}>

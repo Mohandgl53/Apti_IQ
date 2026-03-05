@@ -8,7 +8,7 @@
   body {
     @apply text-primary;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    font-size: 14px; /* Smaller base font for mobile */
+    font-size: 13px; /* Smaller base font for all devices */
     background-color: #FAF8F4; /* Lighter, brighter cream */
     background-image: 
       /* Ruled lines - much lighter */
@@ -26,7 +26,13 @@
 
   @media (min-width: 640px) {
     body {
-      font-size: 16px; /* Normal size for tablet and up */
+      font-size: 14px; /* Slightly larger for tablet */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 15px; /* Normal size for desktop */
     }
   }
 
