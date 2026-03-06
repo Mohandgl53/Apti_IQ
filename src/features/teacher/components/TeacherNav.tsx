@@ -16,7 +16,7 @@ export const TeacherNav = () => {
   return (
     <div className="hidden lg:block lg:sticky lg:top-20 w-64">
       <Card className="p-4">
-        <h3 className="font-bold text-primary mb-4 text-sm uppercase tracking-wide">
+        <h3 className="font-bold text-primary mb-4 text-base uppercase tracking-wide">
           Teacher Menu
         </h3>
         <div className="space-y-1">
@@ -24,7 +24,7 @@ export const TeacherNav = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-smooth ${
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg text-base transition-smooth ${
                 isActive(item.path)
                   ? 'bg-secondary text-white font-medium'
                   : 'text-gray-700 hover:bg-gray-100'
@@ -38,7 +38,7 @@ export const TeacherNav = () => {
 
         {/* Tips */}
         <div className="mt-6 p-3 bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg border border-purple-200">
-          <p className="text-xs text-gray-700">
+          <p className="text-sm text-gray-700">
             💡 <span className="font-medium">Tip:</span> Create classes first, then assign tests to them.
           </p>
         </div>

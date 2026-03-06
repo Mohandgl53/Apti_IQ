@@ -23,16 +23,16 @@ export const Navbar = () => {
 
   return (
     <nav className="bg-[#FEFDFB] shadow-sm sticky top-0 z-30 border-b border-[#E5DDD0]">
-      <div className="container mx-auto px-3 sm:px-4">
-        <div className="flex items-center justify-between h-12 sm:h-14">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="flex items-center justify-between h-12 sm:h-14 lg:h-16">
           {/* Left: Logo */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-smooth">
-            <img src="/logo.svg" alt="AptIQ Logo" className="h-8 sm:h-9" />
+            <img src="/logo.svg" alt="AptIQ Logo" className="h-8 sm:h-9 lg:h-11" />
           </Link>
 
           {/* Center: Desktop Navigation */}
           {isAuthenticated && (
-            <div className="hidden lg:flex items-center space-x-4 text-sm">
+            <div className="hidden lg:flex items-center space-x-6 text-base">
               {user?.role === 'teacher' ? (
                 <>
                   <Link to="/teacher/dashboard" className={navLinkClass('/teacher/dashboard')}>
@@ -81,11 +81,11 @@ export const Navbar = () => {
                 <div className="hidden md:block relative">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center space-x-2 text-primary hover:text-secondary transition-smooth"
+                    className="flex items-center space-x-2 text-primary hover:text-secondary transition-smooth text-base"
                   >
                     <span className="font-medium">{user?.name}</span>
                     <svg
-                      className={`w-4 h-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
+                      className={`w-5 h-5 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -103,7 +103,7 @@ export const Navbar = () => {
                       <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20">
                         <Link
                           to="/profile"
-                          className="block px-4 py-2 text-primary hover:bg-gray-100 transition-smooth"
+                          className="block px-4 py-2 text-base text-primary hover:bg-gray-100 transition-smooth"
                           onClick={() => setDropdownOpen(false)}
                         >
                           Profile
@@ -113,7 +113,7 @@ export const Navbar = () => {
                             logout();
                             setDropdownOpen(false);
                           }}
-                          className="w-full text-left px-4 py-2 text-primary hover:bg-gray-100 transition-smooth"
+                          className="w-full text-left px-4 py-2 text-base text-primary hover:bg-gray-100 transition-smooth"
                         >
                           Logout
                         </button>

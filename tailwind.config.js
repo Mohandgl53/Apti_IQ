@@ -17,15 +17,22 @@ export default {
         heading: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
       },
       fontSize: {
-        'xs': ['0.7rem', { lineHeight: '1rem' }],      // 11.2px
-        'sm': ['0.8125rem', { lineHeight: '1.25rem' }], // 13px
-        'base': ['0.875rem', { lineHeight: '1.5rem' }], // 14px
-        'lg': ['1rem', { lineHeight: '1.5rem' }],       // 16px
-        'xl': ['1.125rem', { lineHeight: '1.75rem' }],  // 18px
-        '2xl': ['1.25rem', { lineHeight: '1.75rem' }],  // 20px
-        '3xl': ['1.5rem', { lineHeight: '2rem' }],      // 24px
-        '4xl': ['1.875rem', { lineHeight: '2.25rem' }], // 30px
-        '5xl': ['2.25rem', { lineHeight: '2.5rem' }],   // 36px
+        'xs': ['0.75rem', { lineHeight: '1rem' }],      // 12px mobile
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],  // 14px mobile
+        'base': ['1rem', { lineHeight: '1.5rem' }],     // 16px mobile
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],  // 18px mobile
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],   // 20px mobile
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],      // 24px mobile
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }], // 30px mobile
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],   // 36px mobile
+        '5xl': ['3rem', { lineHeight: '1' }],           // 48px mobile
+      },
+      screens: {
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
       },
       spacing: {
         '0.5': '0.1rem',   // 1.6px
