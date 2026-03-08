@@ -409,6 +409,143 @@ export const LandingPage = () => {
         </div>
       </section>
 
+      {/* Meet the Team */}
+      <section className="container mx-auto px-4 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl font-bold text-primary mb-4">
+            Meet the Team 👨‍💼
+          </h2>
+          <p className="text-xl text-gray-600">
+            The amazing people building AptIQ for students across India.
+          </p>
+        </motion.div>
+
+        {/* Founder */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex justify-center mb-12"
+        >
+          <Card className="max-w-md bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200">
+            <div className="text-center">
+              <div className="text-6xl mb-4">⭐</div>
+              <h3 className="text-2xl font-bold text-primary mb-2">Saktheesh K</h3>
+              <p className="text-lg font-semibold text-secondary mb-2">Founder & Team Lead</p>
+              <p className="text-sm text-gray-600">🎓 P.S.R Engineering College</p>
+            </div>
+          </Card>
+        </motion.div>
+
+        {/* Team Members Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {/* Row 1 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <Card className="h-full bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 hover:shadow-xl transition-all">
+              <div className="text-5xl mb-3">💻</div>
+              <h3 className="text-xl font-bold text-primary mb-2">Narasimha</h3>
+              <p className="text-sm font-semibold text-secondary mb-2">Backend Developer</p>
+              <p className="text-xs text-gray-600">🎓 Sukkanth Institute of Engineering & Technology, Puttut</p>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <Card className="h-full bg-gradient-to-br from-pink-50 to-pink-100 border-2 border-pink-200 hover:shadow-xl transition-all">
+              <div className="text-5xl mb-3">🎨</div>
+              <h3 className="text-xl font-bold text-primary mb-2">Mohamed Mubarak S A J</h3>
+              <p className="text-sm font-semibold text-secondary mb-2">Designer & Data Analyst</p>
+              <p className="text-xs text-gray-600">🎓 KLT College of Engineering, Villupuram, TN</p>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <Card className="h-full bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200 hover:shadow-xl transition-all">
+              <div className="text-5xl mb-3">💻</div>
+              <h3 className="text-xl font-bold text-primary mb-2">Mohan Kumar</h3>
+              <p className="text-sm font-semibold text-secondary mb-2">Full Stack Developer</p>
+              <p className="text-xs text-gray-600">🎓 P.S.R.R Engineering College</p>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            <Card className="h-full bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200 hover:shadow-xl transition-all">
+              <div className="text-5xl mb-3">👨‍💻</div>
+              <h3 className="text-xl font-bold text-primary mb-2">Nalini Saravanan</h3>
+              <p className="text-sm font-semibold text-secondary mb-2">Software Developer</p>
+              <p className="text-xs text-gray-600">🎓 Good Arts & Science College, Thanjavur</p>
+            </Card>
+          </motion.div>
+
+          {/* Row 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+          >
+            <Card className="h-full bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 hover:shadow-xl transition-all">
+              <div className="text-5xl mb-3">🎨</div>
+              <h3 className="text-xl font-bold text-primary mb-2">Mohamed Faaris K M</h3>
+              <p className="text-sm font-semibold text-secondary mb-2">System Design Engineer</p>
+              <p className="text-xs text-gray-600">🎓 KRCET Trichy</p>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+          >
+            <Card className="h-full bg-gradient-to-br from-pink-50 to-pink-100 border-2 border-pink-200 hover:shadow-xl transition-all">
+              <div className="text-5xl mb-3">💻</div>
+              <h3 className="text-xl font-bold text-primary mb-2">Sadhana Shree</h3>
+              <p className="text-sm font-semibold text-secondary mb-2">Frontend Developer</p>
+              <p className="text-xs text-gray-600">🎓 P.S.R.R College of Engineering</p>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.7 }}
+          >
+            <Card className="h-full bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200 hover:shadow-xl transition-all">
+              <div className="text-5xl mb-3">📊</div>
+              <h3 className="text-xl font-bold text-primary mb-2">Sweety</h3>
+              <p className="text-sm font-semibold text-secondary mb-2">Marketing, Management & Operations Strategy</p>
+              <p className="text-xs text-gray-600"></p>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="container mx-auto px-4 py-20 text-center">
         <motion.div
