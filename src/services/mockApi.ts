@@ -66,28 +66,725 @@ const initializeMockData = () => {
 
   mockStore.lessons = [
     // Number Systems lessons
-    { id: '1', chapterId: '1', name: 'Introduction to Numbers', content: '# Introduction to Numbers\n\nNumbers are the foundation of mathematics. Learn about natural numbers, whole numbers, integers, and rational numbers.', duration: 15, completed: true, order: 1, videoUrl: 'https://www.youtube.com/embed/5SqLJRUNh3A' },
-    { id: '2', chapterId: '1', name: 'Prime Numbers', content: '# Prime Numbers\n\nA prime number is divisible only by 1 and itself. Learn identification techniques and properties.', duration: 20, completed: true, order: 2, videoUrl: 'https://www.youtube.com/embed/mIStB5X4U8M' },
-    { id: '3', chapterId: '1', name: 'HCF and LCM', content: '# HCF and LCM\n\nHighest Common Factor and Lowest Common Multiple are fundamental concepts in number theory.', duration: 25, completed: true, order: 3, videoUrl: 'https://www.youtube.com/embed/Jj7l8fJcKAw' },
-    { id: '4', chapterId: '1', name: 'Divisibility Rules', content: '# Divisibility Rules\n\nQuick tricks to check if a number is divisible by 2, 3, 4, 5, 6, 8, 9, 10, and 11.', duration: 18, completed: false, order: 4, videoUrl: 'https://www.youtube.com/embed/UNgr3IxCUKA' },
-    { id: '5', chapterId: '1', name: 'Number Series', content: '# Number Series\n\nIdentify patterns in sequences and find missing numbers.', duration: 22, completed: false, order: 5, videoUrl: 'https://www.youtube.com/embed/Qhaz36TZG5Y' },
+    { 
+      id: '1', 
+      chapterId: '1', 
+      name: 'Introduction to Numbers', 
+      content: `<h1>Introduction to Numbers</h1>
+<p>Numbers are the foundation of mathematics and aptitude tests. Understanding different types of numbers is crucial for solving complex problems.</p>
+
+<h2>Types of Numbers</h2>
+<ul>
+  <li><strong>Natural Numbers (N):</strong> 1, 2, 3, 4, 5... (counting numbers)</li>
+  <li><strong>Whole Numbers (W):</strong> 0, 1, 2, 3, 4... (natural numbers + zero)</li>
+  <li><strong>Integers (Z):</strong> ...-3, -2, -1, 0, 1, 2, 3... (positive and negative whole numbers)</li>
+  <li><strong>Rational Numbers (Q):</strong> Numbers that can be expressed as p/q where q ≠ 0</li>
+  <li><strong>Irrational Numbers:</strong> Numbers that cannot be expressed as fractions (π, √2, etc.)</li>
+</ul>
+
+<h2>Key Properties</h2>
+<p><strong>Commutative Property:</strong> a + b = b + a and a × b = b × a</p>
+<p><strong>Associative Property:</strong> (a + b) + c = a + (b + c)</p>
+<p><strong>Distributive Property:</strong> a × (b + c) = (a × b) + (a × c)</p>
+
+<h2>Practice Tips</h2>
+<p>✓ Memorize number properties<br>
+✓ Practice mental calculations<br>
+✓ Understand number relationships</p>`, 
+      duration: 15, 
+      completed: true, 
+      order: 1, 
+      videoUrl: 'https://www.youtube.com/embed/5SqLJRUNh3A' 
+    },
+    { 
+      id: '2', 
+      chapterId: '1', 
+      name: 'Prime Numbers', 
+      content: `<h1>Prime Numbers</h1>
+<p>A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.</p>
+
+<h2>First 20 Prime Numbers</h2>
+<p>2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71</p>
+
+<h2>Key Facts</h2>
+<ul>
+  <li>2 is the only even prime number</li>
+  <li>1 is neither prime nor composite</li>
+  <li>All prime numbers except 2 are odd</li>
+  <li>Twin primes: Prime pairs with difference of 2 (3,5), (11,13), (17,19)</li>
+</ul>
+
+<h2>How to Check if a Number is Prime</h2>
+<p>1. Check if divisible by 2<br>
+2. Check odd numbers up to √n<br>
+3. If no divisors found, it's prime</p>
+
+<h2>Applications in Aptitude</h2>
+<p>✓ Number series problems<br>
+✓ Factorization questions<br>
+✓ Cryptography concepts</p>`, 
+      duration: 20, 
+      completed: true, 
+      order: 2, 
+      videoUrl: 'https://www.youtube.com/embed/mIStB5X4U8M' 
+    },
+    { 
+      id: '3', 
+      chapterId: '1', 
+      name: 'HCF and LCM', 
+      content: `<h1>HCF and LCM</h1>
+<p>Highest Common Factor (HCF) and Lowest Common Multiple (LCM) are fundamental concepts in number theory.</p>
+
+<h2>HCF (Highest Common Factor)</h2>
+<p>The largest number that divides two or more numbers without remainder.</p>
+<p><strong>Example:</strong> HCF of 12 and 18 = 6</p>
+
+<h2>LCM (Lowest Common Multiple)</h2>
+<p>The smallest number that is a multiple of two or more numbers.</p>
+<p><strong>Example:</strong> LCM of 12 and 18 = 36</p>
+
+<h2>Methods to Find HCF</h2>
+<ul>
+  <li><strong>Prime Factorization:</strong> Find common prime factors</li>
+  <li><strong>Division Method:</strong> Divide larger by smaller repeatedly</li>
+  <li><strong>Euclidean Algorithm:</strong> Most efficient for large numbers</li>
+</ul>
+
+<h2>Important Formula</h2>
+<p><strong>HCF × LCM = Product of two numbers</strong></p>
+<p>If HCF(a,b) = h and LCM(a,b) = l, then a × b = h × l</p>
+
+<h2>Quick Tips</h2>
+<p>✓ HCF is always ≤ smaller number<br>
+✓ LCM is always ≥ larger number<br>
+✓ For coprime numbers, HCF = 1 and LCM = product</p>`, 
+      duration: 25, 
+      completed: true, 
+      order: 3, 
+      videoUrl: 'https://www.youtube.com/embed/Jj7l8fJcKAw' 
+    },
+    { 
+      id: '4', 
+      chapterId: '1', 
+      name: 'Divisibility Rules', 
+      content: `<h1>Divisibility Rules</h1>
+<p>Quick tricks to check if a number is divisible by another without actual division.</p>
+
+<h2>Common Divisibility Rules</h2>
+<ul>
+  <li><strong>By 2:</strong> Last digit is even (0, 2, 4, 6, 8)</li>
+  <li><strong>By 3:</strong> Sum of digits is divisible by 3</li>
+  <li><strong>By 4:</strong> Last two digits form a number divisible by 4</li>
+  <li><strong>By 5:</strong> Last digit is 0 or 5</li>
+  <li><strong>By 6:</strong> Divisible by both 2 and 3</li>
+  <li><strong>By 8:</strong> Last three digits form a number divisible by 8</li>
+  <li><strong>By 9:</strong> Sum of digits is divisible by 9</li>
+  <li><strong>By 10:</strong> Last digit is 0</li>
+  <li><strong>By 11:</strong> Difference of sum of alternate digits is 0 or divisible by 11</li>
+</ul>
+
+<h2>Examples</h2>
+<p><strong>Is 2,346 divisible by 3?</strong><br>
+Sum = 2+3+4+6 = 15 (divisible by 3) ✓ Yes</p>
+
+<p><strong>Is 5,678 divisible by 11?</strong><br>
+(5+7) - (6+8) = 12-14 = -2 (not divisible by 11) ✗ No</p>
+
+<h2>Pro Tips</h2>
+<p>✓ Memorize all rules<br>
+✓ Practice with large numbers<br>
+✓ Combine rules for faster solving</p>`, 
+      duration: 18, 
+      completed: false, 
+      order: 4, 
+      videoUrl: 'https://www.youtube.com/embed/UNgr3IxCUKA' 
+    },
+    { 
+      id: '5', 
+      chapterId: '1', 
+      name: 'Number Series', 
+      content: `<h1>Number Series</h1>
+<p>Identify patterns in sequences and find missing numbers - a common aptitude test topic.</p>
+
+<h2>Types of Series</h2>
+<ul>
+  <li><strong>Arithmetic Series:</strong> Constant difference (2, 5, 8, 11...)</li>
+  <li><strong>Geometric Series:</strong> Constant ratio (2, 6, 18, 54...)</li>
+  <li><strong>Square Series:</strong> Perfect squares (1, 4, 9, 16, 25...)</li>
+  <li><strong>Cube Series:</strong> Perfect cubes (1, 8, 27, 64...)</li>
+  <li><strong>Prime Series:</strong> Prime numbers (2, 3, 5, 7, 11...)</li>
+  <li><strong>Fibonacci Series:</strong> Sum of previous two (1, 1, 2, 3, 5, 8...)</li>
+</ul>
+
+<h2>Pattern Recognition Tips</h2>
+<p>1. Check differences between consecutive terms<br>
+2. Check ratios between consecutive terms<br>
+3. Look for alternating patterns<br>
+4. Check if terms are squares, cubes, or primes</p>
+
+<h2>Example Problems</h2>
+<p><strong>Find next: 3, 7, 15, 31, ?</strong><br>
+Pattern: Each term = (previous × 2) + 1<br>
+Answer: 63</p>
+
+<p><strong>Find missing: 2, 6, 12, ?, 30</strong><br>
+Pattern: 2×1, 2×3, 2×6, 2×10, 2×15<br>
+Answer: 20</p>`, 
+      duration: 22, 
+      completed: false, 
+      order: 5, 
+      videoUrl: 'https://www.youtube.com/embed/Qhaz36TZG5Y' 
+    },
     
     // Algebra lessons
-    { id: '6', chapterId: '2', name: 'Linear Equations', content: '# Linear Equations\n\nSolve equations of the form ax + b = c.', duration: 20, completed: true, order: 1, videoUrl: 'https://www.youtube.com/embed/WUvTyaaNkzM' },
-    { id: '7', chapterId: '2', name: 'Quadratic Equations', content: '# Quadratic Equations\n\nSolve ax² + bx + c = 0 using factorization and formula.', duration: 30, completed: false, order: 2, videoUrl: 'https://www.youtube.com/embed/i7idZfS8t8w' },
-    { id: '8', chapterId: '2', name: 'Inequalities', content: '# Inequalities\n\nUnderstand and solve linear inequalities.', duration: 18, completed: false, order: 3, videoUrl: 'https://www.youtube.com/embed/VqKq78PVO9g' },
+    { id: '6', chapterId: '2', name: 'Linear Equations', content: `<h1>Linear Equations</h1>
+<p>Master the art of solving linear equations - one of the most fundamental skills in algebra and aptitude tests.</p>
+
+<h2>What is a Linear Equation?</h2>
+<p>A linear equation is an algebraic equation where the highest power of the variable is 1. The standard form is:</p>
+<p><strong>ax + b = c</strong>, where a ≠ 0</p>
+
+<h2>Steps to Solve Linear Equations</h2>
+<ol>
+  <li><strong>Simplify both sides:</strong> Remove brackets and combine like terms</li>
+  <li><strong>Isolate the variable term:</strong> Move constants to one side</li>
+  <li><strong>Solve for the variable:</strong> Divide by the coefficient</li>
+  <li><strong>Verify the solution:</strong> Substitute back to check</li>
+</ol>
+
+<h2>Example Problems</h2>
+<p><strong>Example 1: Basic Linear Equation</strong><br>
+Solve: 3x + 5 = 20<br>
+Step 1: 3x = 20 - 5<br>
+Step 2: 3x = 15<br>
+Step 3: x = 15 ÷ 3<br>
+<strong>Answer: x = 5</strong></p>
+
+<p><strong>Example 2: Equation with Variables on Both Sides</strong><br>
+Solve: 5x - 3 = 2x + 9<br>
+Step 1: 5x - 2x = 9 + 3<br>
+Step 2: 3x = 12<br>
+<strong>Answer: x = 4</strong></p>
+
+<p><strong>Example 3: Equation with Fractions</strong><br>
+Solve: (x/2) + 3 = 7<br>
+Step 1: x/2 = 7 - 3<br>
+Step 2: x/2 = 4<br>
+<strong>Answer: x = 8</strong></p>
+
+<h2>Common Mistakes to Avoid</h2>
+<ul>
+  <li>❌ Forgetting to change signs when moving terms</li>
+  <li>❌ Not distributing negative signs correctly</li>
+  <li>❌ Dividing only one side by the coefficient</li>
+  <li>✅ Always perform the same operation on both sides</li>
+</ul>
+
+<h2>Quick Tips for Aptitude Tests</h2>
+<p>✓ Check your answer by substituting back<br>
+✓ Look for shortcuts in multiple choice questions<br>
+✓ Practice mental math for simple equations<br>
+✓ Watch out for negative coefficients</p>`, duration: 20, completed: true, order: 1, videoUrl: 'https://www.youtube.com/embed/WUvTyaaNkzM' },
+    { id: '7', chapterId: '2', name: 'Quadratic Equations', content: `<h1>Quadratic Equations</h1>
+<p>Learn to solve quadratic equations - equations where the highest power of the variable is 2. Essential for competitive exams!</p>
+
+<h2>Standard Form</h2>
+<p><strong>ax² + bx + c = 0</strong>, where a ≠ 0</p>
+<p>Example: x² - 5x + 6 = 0</p>
+
+<h2>Methods to Solve</h2>
+
+<h3>1. Factorization Method</h3>
+<p>Break down the equation into two factors.</p>
+<p><strong>Example:</strong> x² - 5x + 6 = 0<br>
+(x - 2)(x - 3) = 0<br>
+<strong>Solutions: x = 2 or x = 3</strong></p>
+
+<h3>2. Quadratic Formula</h3>
+<p><strong>x = [-b ± √(b² - 4ac)] / 2a</strong></p>
+<p>This formula works for ALL quadratic equations!</p>
+
+<p><strong>Example:</strong> 2x² + 5x - 3 = 0<br>
+Here: a = 2, b = 5, c = -3<br>
+x = [-5 ± √(25 + 24)] / 4<br>
+x = [-5 ± √49] / 4<br>
+x = [-5 ± 7] / 4<br>
+<strong>Solutions: x = 0.5 or x = -3</strong></p>
+
+<h2>The Discriminant (D)</h2>
+<p><strong>D = b² - 4ac</strong></p>
+<p>The discriminant tells us about the nature of roots:</p>
+<ul>
+  <li><strong>D > 0:</strong> Two distinct real roots</li>
+  <li><strong>D = 0:</strong> One repeated real root (equal roots)</li>
+  <li><strong>D < 0:</strong> No real roots (complex roots)</li>
+</ul>
+
+<h2>Sum and Product of Roots</h2>
+<p>For equation ax² + bx + c = 0:</p>
+<ul>
+  <li><strong>Sum of roots:</strong> α + β = -b/a</li>
+  <li><strong>Product of roots:</strong> α × β = c/a</li>
+</ul>
+
+<h2>Practice Problems</h2>
+<p><strong>Problem 1:</strong> Solve x² - 7x + 12 = 0<br>
+<strong>Answer:</strong> x = 3 or x = 4</p>
+
+<p><strong>Problem 2:</strong> Find the discriminant of 3x² + 2x + 1 = 0<br>
+<strong>Answer:</strong> D = 4 - 12 = -8 (No real roots)</p>
+
+<h2>Quick Tips</h2>
+<p>✓ Always check if factorization is possible first<br>
+✓ Use the quadratic formula when factorization is difficult<br>
+✓ Calculate discriminant to know the nature of roots<br>
+✓ Verify your answers by substituting back</p>`, duration: 30, completed: false, order: 2, videoUrl: 'https://www.youtube.com/embed/i7idZfS8t8w' },
+    { id: '8', chapterId: '2', name: 'Inequalities', content: `<h1>Inequalities</h1>
+<p>Master the art of solving and graphing inequalities - a crucial skill for optimization problems and real-world applications.</p>
+
+<h2>What are Inequalities?</h2>
+<p>Inequalities compare two expressions using inequality symbols instead of an equals sign.</p>
+
+<h2>Inequality Symbols</h2>
+<ul>
+  <li><strong>&lt;</strong> Less than (5 &lt; 10)</li>
+  <li><strong>&gt;</strong> Greater than (10 &gt; 5)</li>
+  <li><strong>≤</strong> Less than or equal to (x ≤ 5)</li>
+  <li><strong>≥</strong> Greater than or equal to (x ≥ 3)</li>
+  <li><strong>≠</strong> Not equal to (x ≠ 0)</li>
+</ul>
+
+<h2>Rules for Solving Inequalities</h2>
+<ol>
+  <li><strong>Addition/Subtraction:</strong> Adding or subtracting the same number preserves the inequality<br>
+  Example: If x + 3 &gt; 5, then x &gt; 2</li>
+  <li><strong>Multiplication/Division by Positive:</strong> Preserves the inequality<br>
+  Example: If 2x &gt; 6, then x &gt; 3</li>
+  <li><strong>Multiplication/Division by Negative:</strong> REVERSES the inequality<br>
+  Example: If -2x &gt; 6, then x &lt; -3</li>
+</ol>
+
+<h2>Example Problems</h2>
+<p><strong>Example 1: Simple Inequality</strong><br>
+Solve: 3x - 5 &gt; 10<br>
+Step 1: 3x &gt; 10 + 5<br>
+Step 2: 3x &gt; 15<br>
+<strong>Answer: x &gt; 5</strong></p>
+
+<p><strong>Example 2: Negative Coefficient</strong><br>
+Solve: -4x + 8 ≤ 20<br>
+Step 1: -4x ≤ 20 - 8<br>
+Step 2: -4x ≤ 12<br>
+Step 3: x ≥ -3 (inequality reversed!)<br>
+<strong>Answer: x ≥ -3</strong></p>
+
+<p><strong>Example 3: Compound Inequality</strong><br>
+Solve: -2 &lt; 3x + 1 &lt; 10<br>
+Step 1: -3 &lt; 3x &lt; 9<br>
+<strong>Answer: -1 &lt; x &lt; 3</strong></p>
+
+<h2>Graphing Inequalities</h2>
+<ul>
+  <li><strong>Open circle (○):</strong> Use for &lt; or &gt; (value not included)</li>
+  <li><strong>Closed circle (●):</strong> Use for ≤ or ≥ (value included)</li>
+  <li><strong>Shade right:</strong> For x &gt; a or x ≥ a</li>
+  <li><strong>Shade left:</strong> For x &lt; a or x ≤ a</li>
+</ul>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li>❌ Forgetting to reverse inequality when multiplying/dividing by negative</li>
+  <li>❌ Using wrong circle type (open vs closed)</li>
+  <li>❌ Shading the wrong direction on number line</li>
+  <li>✅ Always check your solution by testing a value</li>
+</ul>
+
+<h2>Quick Tips</h2>
+<p>✓ Remember: Negative multiplication/division flips the sign<br>
+✓ Test your answer with a sample value<br>
+✓ Draw a number line for visualization<br>
+✓ Pay attention to "or equal to" conditions</p>`, duration: 18, completed: false, order: 3, videoUrl: 'https://www.youtube.com/embed/VqKq78PVO9g' },
     
     // Puzzles lessons
-    { id: '9', chapterId: '6', name: 'Seating Arrangements', content: '# Seating Arrangements\n\nSolve circular and linear seating puzzles.', duration: 25, completed: true, order: 1, videoUrl: 'https://www.youtube.com/embed/Yx8Tn0UT8Hs' },
-    { id: '10', chapterId: '6', name: 'Floor Puzzles', content: '# Floor Puzzles\n\nArrange people across different floors based on conditions.', duration: 28, completed: false, order: 2, videoUrl: 'https://www.youtube.com/embed/8p7Yx8tn0hs' },
+    { id: '9', chapterId: '6', name: 'Seating Arrangements', content: `<h1>Seating Arrangements</h1>
+<p>Master one of the most common logical reasoning topics in aptitude tests - seating arrangement puzzles!</p>
+
+<h2>Types of Seating Arrangements</h2>
+
+<h3>1. Linear Arrangement</h3>
+<p>People sit in a straight line (row), either facing the same direction or opposite directions.</p>
+<p><strong>Formula:</strong> n people can be arranged in <strong>n!</strong> ways</p>
+
+<h3>2. Circular Arrangement</h3>
+<p>People sit around a circular table. One position is fixed as reference.</p>
+<p><strong>Formula:</strong> n people can be arranged in <strong>(n-1)!</strong> ways</p>
+
+<h2>Key Concepts</h2>
+<ul>
+  <li><strong>Facing Center:</strong> Left and right are as we see them</li>
+  <li><strong>Facing Outside:</strong> Left and right are reversed</li>
+  <li><strong>Immediate Neighbors:</strong> People sitting directly next to each other</li>
+  <li><strong>Opposite:</strong> In circular: directly across; In linear: not applicable</li>
+</ul>
+
+<h2>Solving Strategy</h2>
+<ol>
+  <li><strong>Draw a diagram:</strong> Visual representation is crucial</li>
+  <li><strong>Mark fixed positions first:</strong> Start with definite information</li>
+  <li><strong>Use given conditions:</strong> Apply each clue systematically</li>
+  <li><strong>Eliminate impossible arrangements:</strong> Cross out what can't work</li>
+  <li><strong>Verify all conditions:</strong> Check your final answer</li>
+</ol>
+
+<h2>Example Problem</h2>
+<p><strong>Linear Arrangement:</strong></p>
+<p>Six friends A, B, C, D, E, F are sitting in a row facing north.</p>
+<ul>
+  <li>A sits third from the left end</li>
+  <li>B sits second to the right of A</li>
+  <li>C sits at one of the ends</li>
+  <li>D sits between E and F</li>
+</ul>
+
+<p><strong>Solution:</strong><br>
+Position: 1 - 2 - 3 - 4 - 5 - 6<br>
+Step 1: A is at position 3<br>
+Step 2: B is at position 5 (second right of A)<br>
+Step 3: C is at position 1 or 6<br>
+Step 4: D is between E and F<br>
+<strong>Final: C - E - A - D - B - F</strong></p>
+
+<h2>Common Patterns</h2>
+<ul>
+  <li>✓ "Second to the right" = 2 positions away</li>
+  <li>✓ "Immediate right" = Next position</li>
+  <li>✓ "Between X and Y" = X - Person - Y</li>
+  <li>✓ "At the end" = Position 1 or last position</li>
+</ul>
+
+<h2>Tips for Quick Solving</h2>
+<p>✓ Always draw the arrangement<br>
+✓ Start with the most specific clues<br>
+✓ Use elimination method for options<br>
+✓ Check if facing direction matters<br>
+✓ Count positions carefully (don't skip!)</p>
+
+<h2>Practice Tip</h2>
+<p>These puzzles appear in almost every aptitude test. Practice 10-15 different patterns to master this topic!</p>`, duration: 25, completed: true, order: 1, videoUrl: 'https://www.youtube.com/embed/Yx8Tn0UT8Hs' },
+    { id: '10', chapterId: '6', name: 'Floor Puzzles', content: `<h1>Floor Puzzles</h1>
+<p>Learn to solve floor-based arrangement puzzles - a popular variation of logical reasoning questions in competitive exams.</p>
+
+<h2>What are Floor Puzzles?</h2>
+<p>Floor puzzles involve arranging people or objects across different floors of a building based on given conditions.</p>
+
+<h2>Common Patterns</h2>
+<ul>
+  <li><strong>Who lives on which floor:</strong> Direct floor assignment</li>
+  <li><strong>Who lives above/below whom:</strong> Relative positioning</li>
+  <li><strong>Floor number constraints:</strong> Specific floor requirements</li>
+  <li><strong>Gap between floors:</strong> Number of floors between people</li>
+  <li><strong>Consecutive floors:</strong> People on adjacent floors</li>
+</ul>
+
+<h2>Types of Buildings</h2>
+<h3>1. Ground Floor = Floor 1</h3>
+<p>Floors numbered from bottom: 1, 2, 3, 4, 5...</p>
+
+<h3>2. Ground Floor = Floor 0</h3>
+<p>Floors numbered: 0, 1, 2, 3, 4...</p>
+
+<p><strong>Important:</strong> Always check which numbering system is used!</p>
+
+<h2>Solving Strategy</h2>
+<ol>
+  <li><strong>Create a floor diagram:</strong> Draw vertical representation</li>
+  <li><strong>Mark definite positions:</strong> Start with absolute clues</li>
+  <li><strong>Use relative positions:</strong> Apply "above/below" conditions</li>
+  <li><strong>Apply constraints:</strong> Use "not on same floor" type clues</li>
+  <li><strong>Use elimination:</strong> Cross out impossible arrangements</li>
+  <li><strong>Verify all conditions:</strong> Check every given statement</li>
+</ol>
+
+<h2>Example Problem</h2>
+<p><strong>Problem:</strong> A building has 7 floors (1-7). Seven people A, B, C, D, E, F, G live on different floors.</p>
+<ul>
+  <li>A lives on floor 4</li>
+  <li>B lives 2 floors above A</li>
+  <li>C lives on an odd-numbered floor below A</li>
+  <li>D lives immediately above E</li>
+  <li>F lives on the topmost floor</li>
+  <li>G lives below C</li>
+</ul>
+
+<p><strong>Solution:</strong></p>
+<pre>
+Floor 7: F (topmost)
+Floor 6: B (2 above A)
+Floor 5: D
+Floor 4: A (given)
+Floor 3: E (immediately below D)
+Floor 2: (empty - not used)
+Floor 1: C (odd, below A)
+Floor 0: G (below C)
+</pre>
+
+<h2>Key Terms to Remember</h2>
+<ul>
+  <li><strong>"Immediately above/below":</strong> Next floor (gap = 0)</li>
+  <li><strong>"Two floors above":</strong> Gap of 2 floors</li>
+  <li><strong>"Between X and Y":</strong> On a floor between X's and Y's floors</li>
+  <li><strong>"Topmost/Bottommost":</strong> Highest/Lowest floor</li>
+  <li><strong>"Odd/Even floor":</strong> Floor number is odd/even</li>
+</ul>
+
+<h2>Common Mistakes to Avoid</h2>
+<ul>
+  <li>❌ Confusing "above" with "immediately above"</li>
+  <li>❌ Not checking the floor numbering system</li>
+  <li>❌ Forgetting to count the gap correctly</li>
+  <li>❌ Missing the "different floors" constraint</li>
+  <li>✅ Always draw a clear diagram</li>
+</ul>
+
+<h2>Quick Tips</h2>
+<p>✓ Draw a vertical diagram with floor numbers<br>
+✓ Start with absolute positions (specific floors)<br>
+✓ Then apply relative positions (above/below)<br>
+✓ Use process of elimination for remaining positions<br>
+✓ Double-check all conditions before finalizing</p>
+
+<h2>Practice Variations</h2>
+<p>Floor puzzles can be combined with:</p>
+<ul>
+  <li>Different professions or colors</li>
+  <li>Multiple buildings</li>
+  <li>Flat numbers within floors</li>
+  <li>Time-based conditions (who moved when)</li>
+</ul>`, duration: 28, completed: false, order: 2, videoUrl: 'https://www.youtube.com/embed/8p7Yx8tn0hs' },
     
     // Reading Comprehension lessons
-    { id: '11', chapterId: '10', name: 'Main Idea Questions', content: '# Main Idea Questions\n\nIdentify the central theme of a passage.', duration: 20, completed: false, order: 1, videoUrl: 'https://www.youtube.com/embed/TqQQexKZook' },
-    { id: '12', chapterId: '10', name: 'Inference Questions', content: '# Inference Questions\n\nDraw logical conclusions from the passage.', duration: 22, completed: false, order: 2, videoUrl: 'https://www.youtube.com/embed/8Z5sMb7QV-Y' },
+    { id: '11', chapterId: '10', name: 'Main Idea Questions', content: `<h1>Main Idea Questions</h1>
+<p>Learn to identify the central theme of any passage - a critical skill for reading comprehension in all competitive exams.</p>
+
+<h2>What is the Main Idea?</h2>
+<p>The main idea is the primary point or central message the author wants to convey. It's the "big picture" of the passage.</p>
+
+<h2>Main Idea vs Supporting Details</h2>
+<ul>
+  <li><strong>Main Idea:</strong> The overall message (What is the passage about?)</li>
+  <li><strong>Supporting Details:</strong> Facts, examples, and evidence that support the main idea</li>
+</ul>
+
+<h2>How to Find the Main Idea</h2>
+<ol>
+  <li><strong>Read the first paragraph carefully:</strong> Often contains the introduction to the main idea</li>
+  <li><strong>Read the last paragraph:</strong> Usually summarizes or reinforces the main idea</li>
+  <li><strong>Look for repeated concepts:</strong> Ideas mentioned multiple times are likely central</li>
+  <li><strong>Identify topic sentences:</strong> Usually the first sentence of each paragraph</li>
+  <li><strong>Eliminate specific details:</strong> Focus on the broader message</li>
+  <li><strong>Ask "What is this mostly about?":</strong> Your answer is likely the main idea</li>
+</ol>
+
+<h2>Common Question Formats</h2>
+<ul>
+  <li>"The passage is primarily about..."</li>
+  <li>"The main purpose of the passage is to..."</li>
+  <li>"The author's central argument is..."</li>
+  <li>"Which best describes the main idea?"</li>
+  <li>"The passage mainly discusses..."</li>
+  <li>"What is the primary focus of the passage?"</li>
+</ul>
+
+<h2>Example Passage</h2>
+<p><em>"Climate change is one of the most pressing issues of our time. Rising temperatures are causing glaciers to melt, sea levels to rise, and weather patterns to become more extreme. Scientists warn that without immediate action, the consequences could be catastrophic. Governments worldwide are implementing policies to reduce carbon emissions, but progress has been slow. Individual actions, such as reducing energy consumption and supporting sustainable practices, are also crucial in combating this global challenge."</em></p>
+
+<p><strong>Question:</strong> What is the main idea of this passage?</p>
+<p><strong>Options:</strong></p>
+<ol type="A">
+  <li>Glaciers are melting due to rising temperatures</li>
+  <li>Governments are implementing carbon reduction policies</li>
+  <li>Climate change is a critical issue requiring urgent action</li>
+  <li>Individual actions can help reduce energy consumption</li>
+</ol>
+
+<p><strong>Answer: C</strong> - This captures the overall message. Options A, B, and D are supporting details.</p>
+
+<h2>Tips to Identify Main Idea</h2>
+<ul>
+  <li>✓ The main idea is usually stated, not implied</li>
+  <li>✓ It should be broad enough to cover the entire passage</li>
+  <li>✓ It should not be too specific (that's a detail)</li>
+  <li>✓ It should not be too vague (that's too general)</li>
+  <li>✓ All paragraphs should relate to the main idea</li>
+</ul>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li>❌ Choosing a supporting detail instead of the main idea</li>
+  <li>❌ Selecting an option that's too broad or too narrow</li>
+  <li>❌ Getting distracted by interesting but minor points</li>
+  <li>❌ Not reading the entire passage before answering</li>
+  <li>✅ Always read the full passage and all options</li>
+</ul>
+
+<h2>Quick Strategy</h2>
+<p><strong>The 3-Step Method:</strong></p>
+<ol>
+  <li>Read the passage completely</li>
+  <li>Summarize it in one sentence in your mind</li>
+  <li>Find the option that matches your summary</li>
+</ol>
+
+<h2>Practice Tip</h2>
+<p>After reading any article or passage, practice summarizing it in one sentence. This builds your main idea identification skill!</p>`, duration: 20, completed: false, order: 1, videoUrl: 'https://www.youtube.com/embed/TqQQexKZook' },
+    { id: '12', chapterId: '10', name: 'Inference Questions', content: `<h1>Inference Questions</h1>
+<p>Master the art of reading between the lines - drawing logical conclusions from what's stated in the passage.</p>
+
+<h2>What is an Inference?</h2>
+<p>An inference is a logical conclusion reached based on evidence and reasoning from the passage. It's something that is <strong>implied but not directly stated</strong>.</p>
+
+<h2>Inference vs Assumption</h2>
+<ul>
+  <li><strong>Inference:</strong> Based on evidence in the passage (✓ Correct)</li>
+  <li><strong>Assumption:</strong> Based on personal beliefs or outside knowledge (✗ Wrong)</li>
+</ul>
+
+<h2>Key Skills for Making Inferences</h2>
+<ol>
+  <li><strong>Read between the lines:</strong> Look for implied meanings</li>
+  <li><strong>Use context clues:</strong> Surrounding information provides hints</li>
+  <li><strong>Connect ideas:</strong> Link different parts of the passage</li>
+  <li><strong>Avoid assumptions:</strong> Don't bring in outside knowledge</li>
+  <li><strong>Stay logical:</strong> The inference must be reasonable</li>
+</ol>
+
+<h2>Common Question Formats</h2>
+<ul>
+  <li>"It can be inferred from the passage that..."</li>
+  <li>"The author suggests that..."</li>
+  <li>"The passage implies that..."</li>
+  <li>"Based on the passage, we can conclude..."</li>
+  <li>"Which of the following can be inferred?"</li>
+  <li>"The author would most likely agree that..."</li>
+</ul>
+
+<h2>Example Passage</h2>
+<p><em>"Maria checked her watch for the third time in five minutes. The train was already twenty minutes late. She tapped her foot impatiently and kept glancing at the empty tracks. Her interview was scheduled to start in forty minutes, and the journey would take at least thirty minutes."</em></p>
+
+<p><strong>Question:</strong> What can be inferred about Maria?</p>
+<p><strong>Options:</strong></p>
+<ol type="A">
+  <li>Maria is going to miss her interview</li>
+  <li>Maria is anxious about being late</li>
+  <li>Maria has never taken a train before</li>
+  <li>The train service is always unreliable</li>
+</ol>
+
+<p><strong>Answer: B</strong> - Her repeated watch-checking, foot-tapping, and the time pressure suggest anxiety. Option A is too definite, C and D are assumptions not supported by the text.</p>
+
+<h2>Types of Inference Questions</h2>
+
+<h3>1. Character Inference</h3>
+<p>What can we infer about a person's feelings, motivations, or personality?</p>
+
+<h3>2. Cause and Effect Inference</h3>
+<p>What likely caused something or what will likely happen next?</p>
+
+<h3>3. Author's Purpose Inference</h3>
+<p>Why did the author include certain information or use specific language?</p>
+
+<h3>4. Relationship Inference</h3>
+<p>How are ideas, events, or people connected?</p>
+
+<h2>How to Answer Inference Questions</h2>
+<ol>
+  <li><strong>Read the passage carefully:</strong> Don't skim</li>
+  <li><strong>Identify relevant information:</strong> What evidence supports each option?</li>
+  <li><strong>Eliminate extreme options:</strong> Avoid "always," "never," "must"</li>
+  <li><strong>Choose the most logical:</strong> The inference should be reasonable</li>
+  <li><strong>Verify with passage:</strong> Can you point to supporting evidence?</li>
+</ol>
+
+<h2>Red Flags - Avoid These Options</h2>
+<ul>
+  <li>❌ Requires outside knowledge not in the passage</li>
+  <li>❌ Makes extreme claims (always, never, only, must)</li>
+  <li>❌ Contradicts information in the passage</li>
+  <li>❌ Goes too far beyond what's stated</li>
+  <li>✅ Supported by evidence in the passage</li>
+  <li>✅ Uses moderate language (likely, suggests, may)</li>
+</ul>
+
+<h2>Practice Example</h2>
+<p><em>"The ancient library contained thousands of scrolls, many of which had not been read in centuries. Dust covered the shelves, and the air smelled of old parchment. The librarian, an elderly man with thick glasses, spent his days carefully cataloging each document."</em></p>
+
+<p><strong>What can be inferred?</strong></p>
+<ol type="A">
+  <li>The library is no longer in use</li>
+  <li>The librarian is dedicated to preserving the scrolls</li>
+  <li>All the scrolls are written in ancient languages</li>
+  <li>The library will be demolished soon</li>
+</ol>
+
+<p><strong>Answer: B</strong> - The librarian's careful cataloging despite the library's condition suggests dedication. Options A, C, and D make unsupported assumptions.</p>
+
+<h2>Quick Tips</h2>
+<p>✓ Inference = Evidence + Logic<br>
+✓ Stay within the passage's scope<br>
+✓ Look for tone and word choice clues<br>
+✓ Connect multiple pieces of information<br>
+✓ The answer should feel "strongly suggested"</p>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li>❌ Choosing what you personally believe</li>
+  <li>❌ Selecting information directly stated (that's not inference!)</li>
+  <li>❌ Making wild leaps in logic</li>
+  <li>✅ Choose what the passage strongly suggests</li>
+</ul>`, duration: 22, completed: false, order: 2, videoUrl: 'https://www.youtube.com/embed/8Z5sMb7QV-Y' },
     
     // Tables lessons
-    { id: '13', chapterId: '16', name: 'Basic Table Reading', content: '# Basic Table Reading\n\nExtract information from tabular data.', duration: 15, completed: true, order: 1, videoUrl: 'https://www.youtube.com/embed/RjQda040BU0' },
-    { id: '14', chapterId: '16', name: 'Percentage Calculations', content: '# Percentage Calculations\n\nCalculate percentages from table data.', duration: 20, completed: true, order: 2, videoUrl: 'https://www.youtube.com/embed/WYWPx317qgw' },
+    { id: '13', chapterId: '16', name: 'Basic Table Reading', content: `<h1>Basic Table Reading</h1>
+<p>Extract information from tabular data efficiently.</p>
+
+<h2>Table Components</h2>
+<p>✓ Column headers<br>
+✓ Row labels<br>
+✓ Data cells<br>
+✓ Totals/subtotals</p>
+
+<h2>Reading Strategy</h2>
+<p>1. Understand headers<br>
+2. Identify units<br>
+3. Locate required data<br>
+4. Perform calculations</p>
+
+<h2>Common Operations</h2>
+<p>✓ Finding maximum/minimum<br>
+✓ Calculating totals<br>
+✓ Comparing values<br>
+✓ Finding averages</p>`, duration: 15, completed: true, order: 1, videoUrl: 'https://www.youtube.com/embed/RjQda040BU0' },
+    { id: '14', chapterId: '16', name: 'Percentage Calculations', content: `<h1>Percentage Calculations</h1>
+<p>Calculate percentages from table data quickly and accurately.</p>
+
+<h2>Basic Formula</h2>
+<p>Percentage = (Part / Whole) × 100</p>
+
+<h2>Common Calculations</h2>
+<p>✓ Percentage increase/decrease<br>
+✓ Percentage share<br>
+✓ Percentage change<br>
+✓ Percentage distribution</p>
+
+<h2>Quick Tips</h2>
+<p>✓ Convert fractions to percentages<br>
+✓ Use approximation for speed<br>
+✓ Remember common percentages (1/2 = 50%, 1/4 = 25%)</p>
+
+<h2>Example</h2>
+<p>If sales increased from 200 to 250:<br>
+Increase = 250 - 200 = 50<br>
+% Increase = (50/200) × 100 = 25%</p>`, duration: 20, completed: true, order: 2, videoUrl: 'https://www.youtube.com/embed/WYWPx317qgw' },
   ];
 
   mockStore.leaderboard = Array.from({ length: 20 }, (_, i) => ({

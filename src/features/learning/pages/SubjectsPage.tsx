@@ -36,7 +36,12 @@ const SubjectsPage = () => {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-4xl font-bold text-primary">Learn</h1>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-4xl font-bold text-primary mb-2">Learn</h1>
+          <p className="text-gray-600">Master aptitude skills with structured learning paths</p>
+        </div>
+      </div>
       
       {/* Continue Learning Banner */}
       {inProgressSubject && (
@@ -46,14 +51,17 @@ const SubjectsPage = () => {
         >
           <Card className="bg-gradient-to-r from-secondary/10 to-primary/10 border-2 border-secondary/20">
             <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <p className="text-sm text-gray-600 mb-1">Continue Learning</p>
-                <h3 className="text-2xl font-bold text-primary mb-2">
-                  {inProgressSubject.name}
-                </h3>
-                <p className="text-gray-600">
-                  {inProgressSubject.progress}% complete • {inProgressSubject.chaptersCount} chapters
-                </p>
+              <div className="flex items-center gap-4 flex-1">
+                <div className="text-5xl">{inProgressSubject.icon}</div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-600 mb-1">Continue Learning</p>
+                  <h3 className="text-2xl font-bold text-primary mb-2">
+                    {inProgressSubject.name}
+                  </h3>
+                  <p className="text-gray-600">
+                    {inProgressSubject.progress}% complete • {inProgressSubject.chaptersCount} chapters
+                  </p>
+                </div>
               </div>
               <Link to={`/subjects/${inProgressSubject.id}/chapters`}>
                 <Button variant="primary" size="lg">

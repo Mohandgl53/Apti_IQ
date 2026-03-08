@@ -92,14 +92,16 @@ const LessonDetailPage = () => {
         >
           {/* YouTube Video Section */}
           {lesson?.videoUrl && (
-            <Card className="mb-6 overflow-hidden">
+            <Card className="mb-6 overflow-hidden bg-gradient-to-br from-purple-50 to-blue-50">
               <div className="mb-4">
-                <h2 className="text-2xl font-bold text-primary mb-2">📺 Video Lesson</h2>
+                <h2 className="text-2xl font-bold text-primary mb-2 flex items-center gap-2">
+                  <span className="text-3xl">📺</span> Video Lesson
+                </h2>
                 <p className="text-sm text-gray-600">Watch this video to understand the concept better</p>
               </div>
-              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <div className="relative w-full rounded-lg overflow-hidden shadow-lg" style={{ paddingBottom: '56.25%' }}>
                 <iframe
-                  className="absolute top-0 left-0 w-full h-full rounded-lg"
+                  className="absolute top-0 left-0 w-full h-full"
                   src={lesson.videoUrl}
                   title={lesson.name}
                   frameBorder="0"
@@ -114,9 +116,12 @@ const LessonDetailPage = () => {
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-3">
                 <Badge variant="default">Lesson {lesson?.order}</Badge>
-                <span className="text-sm text-gray-600">⏱️ {lesson?.duration} minutes</span>
+                <span className="text-sm text-gray-600 flex items-center gap-1">
+                  <span>⏱️</span> {lesson?.duration} minutes
+                </span>
               </div>
-              <h1 className="text-4xl font-bold text-primary font-handwriting">{lesson?.name}</h1>
+              <h1 className="text-4xl font-bold text-primary font-handwriting mb-2">{lesson?.name}</h1>
+              <div className="h-1 w-24 bg-secondary rounded-full"></div>
             </div>
             
             <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">

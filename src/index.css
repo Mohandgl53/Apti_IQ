@@ -100,6 +100,68 @@
   }
 }
 
+/* Enhanced styling for lesson content */
+.prose h1 {
+  @apply text-3xl font-bold text-primary mb-4 mt-6;
+  border-bottom: 3px solid #6366f1;
+  padding-bottom: 0.5rem;
+}
+
+.prose h2 {
+  @apply text-2xl font-bold text-primary mb-3 mt-5;
+  color: #4f46e5;
+}
+
+.prose h3 {
+  @apply text-xl font-semibold text-primary mb-2 mt-4;
+  color: #6366f1;
+}
+
+.prose p {
+  @apply mb-4 text-gray-700 leading-relaxed;
+}
+
+.prose ul, .prose ol {
+  @apply mb-4 ml-6 space-y-2;
+}
+
+.prose ul li {
+  @apply text-gray-700;
+  list-style-type: disc;
+}
+
+.prose ol li {
+  @apply text-gray-700;
+  list-style-type: decimal;
+}
+
+.prose strong {
+  @apply font-semibold text-primary;
+}
+
+.prose em {
+  @apply italic text-gray-600;
+}
+
+.prose pre {
+  @apply bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto;
+  border-left: 4px solid #6366f1;
+}
+
+.prose code {
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+}
+
+/* Special styling for example boxes */
+.prose p:has(strong:first-child) {
+  @apply bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400;
+}
+
+/* Tips and notes styling */
+.prose p:has(> br) {
+  @apply leading-loose;
+}
+
 
 
 
