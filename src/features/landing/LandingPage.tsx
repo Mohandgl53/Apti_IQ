@@ -432,14 +432,14 @@ export const LandingPage = () => {
           viewport={{ once: true }}
           className="flex justify-center mb-12"
         >
-          <Card className="w-full max-w-lg bg-gradient-to-br from-yellow-50 to-yellow-100 border-3 border-yellow-300 shadow-xl">
-            <div className="text-center py-6">
-              <div className="text-7xl mb-4">⭐</div>
-              <h3 className="text-3xl font-bold text-primary mb-2">Saktheesh K</h3>
-              <p className="text-xl font-semibold text-secondary mb-2">Founder & Team Lead</p>
-              <p className="text-base text-gray-600">🎓 P.S.R Engineering College</p>
-            </div>
-          </Card>
+          <div className="w-full max-w-xs">
+            <Card className="h-full bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200 hover:shadow-xl transition-all">
+              <div className="text-5xl mb-3">⭐</div>
+              <h3 className="text-xl font-bold text-primary mb-2">Saktheesh K</h3>
+              <p className="text-sm font-semibold text-secondary mb-2">Founder & Team Lead</p>
+              <p className="text-xs text-gray-600">🎓 P.S.R Engineering College</p>
+            </Card>
+          </div>
         </motion.div>
 
         {/* Team Members Grid */}
