@@ -90,70 +90,8 @@ function Sprite({ position, scale, symbol }: { position: [number, number, number
 
   return (
     <sprite position={position} scale={[scale, scale, 1]}>
-      <spriteMaterial map={texture} transparent opacity={0.8} />
+      <spriteMaterial map={texture} transparent opacity={0.6} />
     </sprite>
-  );
-}
-
-// Floating background particles (small dots for depth)
-function BackgroundDots() {
-  const particlesRef = useRef<THREE.Points>(null);
-  const particleCount = 1500;
-
-  const [positions, colors] = useMemo(() => {
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 30;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 30;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
-
-      const color = new THREE.Color();
-      const hue = Math.random() * 0.3 + 0.55; // Blue to purple range
-      color.setHSL(hue, 0.7, 0.6);
-      colors[i * 3] = color.r;
-      colors[i * 3 + 1] = color.g;
-      colors[i * 3 + 2] = color.b;
-    }
-
-    return [positions, colors];
-  }, []);
-
-  useFrame((state) => {
-    if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-      particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.1;
-    }
-  });
-
-  return (
-    <points ref={particlesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particleCount}
-          array={positions}
-          itemSize={3}
-          args={[positions, 3]}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={particleCount}
-          array={colors}
-          itemSize={3}
-          args={[colors, 3]}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.05}
-        vertexColors
-        transparent
-        opacity={0.5}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
   );
 }
 
@@ -162,20 +100,37 @@ function Scene() {
   return (
     <>
       <ambientLight intensity={0.8} />
-      <BackgroundDots />
       <EducationParticles />
     </>
   );
 }
 
-// Main component
+// Main component with notebook theme
 export function AuthBackground() {
   return (
     <div className="fixed inset-0 -z-10">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50" />
+      {/* Notebook paper background */}
+      <div 
+        className="absolute inset-0 bg-[#FFFEF7]"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(transparent, transparent 31px, #E8DCC4 31px, #E8DCC4 32px)',
+          backgroundSize: '100% 32px',
+        }}
+      />
+      
+      {/* Red margin line */}
+      <div className="absolute left-0 top-0 bottom-0 w-20 border-r-2 border-[#FFB6C1]" />
+      
+      {/* Hole punches */}
+      <div className="absolute left-10 top-20 w-4 h-4 rounded-full bg-white border-2 border-gray-300 shadow-inner" />
+      <div className="absolute left-10 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2 border-gray-300 shadow-inner" />
+      <div className="absolute left-10 bottom-20 w-4 h-4 rounded-full bg-white border-2 border-gray-300 shadow-inner" />
+      
+      {/* Three.js particles overlay */}
       <Canvas
         camera={{ position: [0, 0, 8], fov: 75 }}
         className="absolute inset-0"
+        style={{ opacity: 0.7 }}
       >
         <Scene />
       </Canvas>
