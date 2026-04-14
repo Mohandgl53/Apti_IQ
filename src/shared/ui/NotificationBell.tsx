@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuthStore } from '../../features/auth/store/authStore';
 
 interface Notification {
   id: string;
@@ -16,81 +15,10 @@ export const NotificationBell = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const user = useAuthStore((state) => state.user);
 
-  // Mock notifications based on user role
   useEffect(() => {
-    const mockNotifications: Notification[] = user?.role === 'teacher' 
-      ? [
-          {
-            id: '1',
-            title: 'New Student Enrolled',
-            message: 'John Doe has joined your Mathematics class',
-            type: 'info',
-            timestamp: new Date(Date.now() - 1000 * 60 * 5),
-            read: false,
-            icon: '👤',
-          },
-          {
-            id: '2',
-            title: 'Test Submitted',
-            message: '15 students completed the Algebra Quiz',
-            type: 'success',
-            timestamp: new Date(Date.now() - 1000 * 60 * 30),
-            read: false,
-            icon: '📝',
-          },
-          {
-            id: '3',
-            title: 'Class Reminder',
-            message: 'Physics class starts in 1 hour',
-            type: 'warning',
-            timestamp: new Date(Date.now() - 1000 * 60 * 60),
-            read: true,
-            icon: '⏰',
-          },
-        ]
-      : [
-          {
-            id: '1',
-            title: 'New Badge Earned!',
-            message: 'You earned the "Quick Learner" badge',
-            type: 'achievement',
-            timestamp: new Date(Date.now() - 1000 * 60 * 10),
-            read: false,
-            icon: '🏅',
-          },
-          {
-            id: '2',
-            title: 'Test Available',
-            message: 'New Algebra test is now available',
-            type: 'info',
-            timestamp: new Date(Date.now() - 1000 * 60 * 45),
-            read: false,
-            icon: '📋',
-          },
-          {
-            id: '3',
-            title: 'Streak Milestone',
-            message: '7-day learning streak! Keep it up!',
-            type: 'success',
-            timestamp: new Date(Date.now() - 1000 * 60 * 120),
-            read: true,
-            icon: '🔥',
-          },
-          {
-            id: '4',
-            title: 'Tournament Starting',
-            message: 'Math Championship begins tomorrow',
-            type: 'warning',
-            timestamp: new Date(Date.now() - 1000 * 60 * 180),
-            read: true,
-            icon: '🏆',
-          },
-        ];
-    
-    setNotifications(mockNotifications);
-  }, [user?.role]);
+    setNotifications([]);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
